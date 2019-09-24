@@ -1,6 +1,6 @@
 package factory.employee;
 
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Employee {
@@ -9,14 +9,16 @@ private String name;
 
 private int age;
 
-private String work;
+private String department;
+
 
 
 
     public Employee(String name, int age, String work) {
         this.name = name;
         this.age = age;
-        this.work = work;
+        this.department = work;
+
     }
 
     public String getName() {
@@ -35,11 +37,11 @@ private String work;
         this.age = age;
     }
 
-    public String getWork() {
-        return work;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setWork(String work) {
-        this.work = work;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

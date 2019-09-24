@@ -1,36 +1,56 @@
+import factory.Factory;
+
 import java.util.Scanner;
 
 public class Main {
 
     private static Scanner scan = new Scanner(System.in);
-
+    private static String nameFactory;
+    private static Factory factory ;
 
     public static void main(String[] args) {
 
-        System.out.println("----------");
-        System.out.println("1. By zapisać pracownika \n" +
-                "\n" +
-                "2. By usunąć pracownika \n" +
-                "\n" +
-                "3. By zaktualizować pracownika \n" +
-                "\n" +
-                "4. By zapisać w pliku pracowników \n" +
-                "\n" +
-                "5. By zobaczyć pracowników\n" +
-                "\n" +
-                "6. By sortować pracowników");
+
+        System.out.println("Witaj wpisz nazwę swojej fabryki.");
+        nameFactory = scan.nextLine();
+        System.out.println("------------------------");
+
     }
 
-    private static void  menu(int num){
-       switch (num){
-           case 1:
+    private static void  menu(){
+       int menuNum = -1;
+        System.out.println("Witaj w " + nameFactory);
 
-               break;
-           case 2:
+        while (menuNum == 0) {
+           System.out.println("1. dodać kadrę \n" +
+                   "\n" +
+                   "2. usunąć kadrę\n" +
+                   "\n" +
+                   "\n" +
+                   "3. zobaczyć kadry \n" +
+                   "\n" +
+                   "4. zaktualizować kadrę\n" +
+                   "\n" +
+                   "5. sortować kadrę\n" +
+                   "\n" +
+                   "0. by zakończyć ");
 
-               break;
+            menuNum = scan.nextInt();
+            factory = new Factory(nameFactory);
+           switch (menuNum) {
+               case 1:
+                 
+                   break;
+               case 2:
+
+                   break;
+           }
        }
 
+    }
+
+    private static void employee_menu(int num){
+        System.out.println("Witaj w " + nameFactory);
     }
 
 }

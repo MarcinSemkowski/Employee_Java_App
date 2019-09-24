@@ -1,18 +1,28 @@
 package factory;
 
-import java.util.Set;
-import java.util.TreeSet;
+import factory.employee.Employee;
 
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 public class Factory {
 
 private String name;
 
-private Set employees;
+private Map<String, Set<Employee>> depratment;
 
     public Factory(String name) {
         this.name = name;
-        employees = new TreeSet();
+        depratment = new TreeMap();
     }
+
+    public Employee createEmployee(String name,int age,String department){
+        return new Employee(name,age,department);
+    }
+
+
+
+
 
 
 }
