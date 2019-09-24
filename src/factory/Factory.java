@@ -3,17 +3,19 @@ package factory;
 import factory.employee.Employee;
 
 import java.util.Map;
-import java.util.Set;
+
 import java.util.TreeMap;
 public class Factory {
 
 private String name;
 
-private Map<String, Set<Employee>> depratment;
+private Map<String,Department> depratments;
+
+
 
     public Factory(String name) {
         this.name = name;
-        depratment = new TreeMap();
+        depratments = new TreeMap();
     }
 
     public Employee createEmployee(String name,int age,String department){
