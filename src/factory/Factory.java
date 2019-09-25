@@ -18,13 +18,24 @@ private Map<String,Department> depratments;
         depratments = new TreeMap();
     }
 
-    public Employee createEmployee(String name,int age,String department){
+    public static Employee createEmployee(String name,int age,String department){
         return new Employee(name,age,department);
     }
+    public static Department createDepartment(String nameDepartment){
+        return new Department(nameDepartment);
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-
+    public Map<String, Department> getDepratments() {
+        return depratments;
+    }
 
 
 }

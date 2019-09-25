@@ -1,3 +1,4 @@
+import factory.Department;
 import factory.Factory;
 
 import java.util.Scanner;
@@ -16,6 +17,8 @@ public class Main {
         System.out.println("------------------------");
 
     }
+
+
 
     private static void  menu(){
        int menuNum = -1;
@@ -39,7 +42,25 @@ public class Main {
             factory = new Factory(nameFactory);
            switch (menuNum) {
                case 1:
-                 
+                   System.out.println("Imię:");
+                   String nameDep = scan.nextLine();
+
+                   System.out.println("Nocna Zmiana: ");
+                   System.out.println("1.Tak");
+                   System.out.println("2.Nie");
+                   int isNightShift = scan.nextInt();
+                   Department newDep = Factory.createDepartment(nameDep);
+                   switch (isNightShift){
+                       case 1:
+
+                           newDep.setNightShift(true);
+                         factory.getDepratments().put(newDep.getName(),newDep);
+                         break;
+                       case 2:
+                           newDep.setNightShift(false);
+                           factory.getDepratments().put(newDep.getName(),newDep);
+                           break;
+                   }
                    break;
                case 2:
 
@@ -49,7 +70,18 @@ public class Main {
 
     }
 
-    private static void employee_menu(int num){
+    private static void departmentMenu(){
+        int menuNum = -1;
+        System.out.println("Witaj w " + nameFactory);
+        while (menuNum != 0){
+
+         switch (menuNum){
+             case 1:
+         }
+        }
+    }
+
+    private static void employeeMenu(int num){
         System.out.println("Witaj w " + nameFactory);
     }
 
