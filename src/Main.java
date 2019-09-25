@@ -1,4 +1,3 @@
-import factory.Department;
 import factory.Factory;
 
 import java.util.Scanner;
@@ -7,7 +6,7 @@ public class Main {
 
     private static Scanner scan = new Scanner(System.in);
     private static String nameFactory;
-    private static Factory factory ;
+    private static Factory factory;
 
     public static void main(String[] args) {
 
@@ -15,73 +14,78 @@ public class Main {
         System.out.println("Witaj wpisz nazwę swojej fabryki.");
         nameFactory = scan.nextLine();
         System.out.println("------------------------");
+        factory = new Factory(nameFactory);
 
+        menu();
     }
 
 
+    private static void menu() {
+        int menuNum = -1;
 
-    private static void  menu(){
-       int menuNum = -1;
-        System.out.println("Witaj w " + nameFactory);
 
-        while (menuNum == 0) {
-           System.out.println("1. dodać kadrę \n" +
-                   "\n" +
-                   "2. usunąć kadrę\n" +
-                   "\n" +
-                   "\n" +
-                   "3. zobaczyć kadry \n" +
-                   "\n" +
-                   "4. zaktualizować kadrę\n" +
-                   "\n" +
-                   "5. sortować kadrę\n" +
-                   "\n" +
-                   "0. by zakończyć ");
+        while (menuNum != 0) {
+            System.out.println("Witaj w " + nameFactory);
+            System.out.println("1. dodać kadrę \n" +
+                    "\n" +
+                    "2. usunąć kadrę\n" +
+                    "\n" +
+                    "\n" +
+                    "3. zobaczyć kadry \n" +
+                    "\n" +
+                    "4. zaktualizować kadrę\n" +
+                    "\n" +
+                    "5. sortować kadrę\n" +
+                    "\n" +
+                    "0. by zakończyć ");
+            System.out.println("----------------------");
+            System.out.println();
 
             menuNum = scan.nextInt();
-            factory = new Factory(nameFactory);
-           switch (menuNum) {
-               case 1:
-                   System.out.println("Imię:");
-                   String nameDep = scan.nextLine();
+            switch (menuNum) {
+                case 1:
+                    System.out.println("Imię:");
+                    String nameDep = scan.next();
 
-                   System.out.println("Nocna Zmiana: ");
-                   System.out.println("1.Tak");
-                   System.out.println("2.Nie");
-                   int isNightShift = scan.nextInt();
-                   Department newDep = Factory.createDepartment(nameDep);
-                   switch (isNightShift){
-                       case 1:
+                    System.out.println("Nocna Zmiana: ");
+                    System.out.println("True. Tak");
+                    System.out.println("False. Nie");
+                     boolean isNightShift = scan.nextBoolean();
 
-                           newDep.setNightShift(true);
-                         factory.getDepratments().put(newDep.getName(),newDep);
-                         break;
-                       case 2:
-                           newDep.setNightShift(false);
-                           factory.getDepratments().put(newDep.getName(),newDep);
-                           break;
-                   }
-                   break;
-               case 2:
+                      factory.addToMapDepartment(nameDep,isNightShift);
+                    break;
+                case 2:
+                    System.out.println("Wybierz kadrę, by usunąć.");
+                    int i = 0;
+                    String[] mapKey = new String[factory.getDepartmentMap().size()];
+                    for (String nameKey : factory.getDepartmentMap().keySet()) {
+                        System.out.println(i + ". " + nameKey);
+                        mapKey[i++] = nameKey;
+                    }
 
-                   break;
-           }
-       }
+                    switch (mapKey.length){
+
+                    }
+                    System.out.println("------------------------");
+                    System.out.println();
+                    break;
+            }
+        }
 
     }
 
-    private static void departmentMenu(){
+    private static void departmentMenu() {
         int menuNum = -1;
         System.out.println("Witaj w " + nameFactory);
-        while (menuNum != 0){
+        while (menuNum != 0) {
 
-         switch (menuNum){
-             case 1:
-         }
+            switch (menuNum) {
+                case 1:
+            }
         }
     }
 
-    private static void employeeMenu(int num){
+    private static void employeeMenu(int num) {
         System.out.println("Witaj w " + nameFactory);
     }
 
