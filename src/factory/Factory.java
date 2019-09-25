@@ -17,22 +17,18 @@ public class Factory {
         departmentMap = new HashMap<>();
     }
 
-    public static Employee createEmployee(String name, int age, String department) {
-        return new Employee(name, age, department);
-    }
 
-    public static Department createDepartment(String nameDepartment) {
-        return new Department(nameDepartment);
-    }
 
 
     public void addToMapDepartment(String nameDep,boolean nightShift){
-        Department newDep = Factory.createDepartment(nameDep);
+        Department newDep = new Department(nameDep);
         newDep.setNightShift(nightShift);
         departmentMap.put(newDep.getName(), newDep);
     }
 
-    
+    public void deleteFromMapDepartment(int index,String[] arrayKey){
+
+    }
 
 
     public String getName() {

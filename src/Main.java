@@ -56,18 +56,18 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Wybierz kadrę, by usunąć.");
+
                     int i = 0;
                     String[] mapKey = new String[factory.getDepartmentMap().size()];
                     for (String nameKey : factory.getDepartmentMap().keySet()) {
-                        System.out.println(i + ". " + nameKey);
+                        System.out.println(i + ": " + nameKey);
                         mapKey[i++] = nameKey;
-                    }
-
-                    switch (mapKey.length){
-
                     }
                     System.out.println("------------------------");
                     System.out.println();
+                    System.out.println(":");
+                    int deleteId = scan.nextInt();
+                    factory.deleteFromMapDepartment(deleteId,mapKey);
                     break;
             }
         }
