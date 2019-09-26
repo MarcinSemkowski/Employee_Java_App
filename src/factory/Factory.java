@@ -27,11 +27,12 @@ public class Factory {
        return departmentMap.containsKey(newDep.getName());
     }
 
-    public void deleteFromMapDepartment(int index,String[] arrayKey){
+    public boolean deleteFromMapDepartment(int index,String[] arrayKey){
        String key = arrayKey[index];
        departmentMap.remove(key);
         System.out.println("Poprawnie Usunięto: " + key);
         System.out.println("-------------------------------");
+       return  departmentMap.containsKey(key);
     }
 
 

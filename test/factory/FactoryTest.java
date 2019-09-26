@@ -12,6 +12,7 @@ public class FactoryTest {
     @Before
     public void init(){
         factory = new Factory("dev");
+
     }
 
 
@@ -19,10 +20,9 @@ public class FactoryTest {
     public void addToMapDepartment() {
       //given
         String nameDepTest = "developers";
-        boolean nightShift = true;
         Department departmentTest = new Department(nameDepTest);
         //when
-        departmentTest.setNightShift(nightShift);
+        departmentTest.setNightShift(false);
         boolean isDepAdded = factory.addToMapDepartment(departmentTest.getName(),departmentTest.isNightShift());
         //then
           assertTrue(isDepAdded);
@@ -30,5 +30,17 @@ public class FactoryTest {
 
     @Test
     public void deleteFromMapDepartment() {
+        //given
+        String nameDepTest = "developers";
+        Department departmentTest = new Department(nameDepTest);
+        factory.addToMapDepartment(departmentTest.getName(),departmentTest.isNightShift());
+        String[] arrayKeyTest = new String[factory.getDepartmentMap().size()];
+        int i =0;
+        //when
+        for (String keyTest: factory.getDepartmentMap().keySet()) {
+           arrayKeyTest[i++] = keyTest;
+        }
+          //then
+        assertFalse(factory.deleteFromMapDepartment(0,arrayKeyTest));
     }
 }
