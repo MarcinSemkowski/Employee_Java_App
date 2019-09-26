@@ -27,7 +27,10 @@ public class Factory {
     }
 
     public void deleteFromMapDepartment(int index,String[] arrayKey){
-
+       String key = arrayKey[index];
+       departmentMap.remove(key);
+        System.out.println("Poprawnie Usunięto: " + key);
+        System.out.println("-------------------------------");
     }
 
 
