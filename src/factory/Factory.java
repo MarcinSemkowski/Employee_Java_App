@@ -20,10 +20,11 @@ public class Factory {
 
 
 
-    public void addToMapDepartment(String nameDep,boolean nightShift){
+    public boolean addToMapDepartment(String nameDep,boolean nightShift){
         Department newDep = new Department(nameDep);
         newDep.setNightShift(nightShift);
         departmentMap.put(newDep.getName(), newDep);
+       return departmentMap.containsKey(newDep.getName());
     }
 
     public void deleteFromMapDepartment(int index,String[] arrayKey){
