@@ -72,6 +72,24 @@ public class Main {
                 case 3:
                      System.out.println(factory.showDepartmentsFromMapDepartment());
                     break;
+                   case 4:
+
+                       System.out.println("Wybierz kadrę. By zaktualizować.");
+
+                       int j = 0;
+                       String[] mapKeys = new String[factory.getDepartmentMap().size()];
+                       for (String nameKey : factory.getDepartmentMap().keySet()) {
+                           System.out.println(j + ": " + nameKey);
+                           mapKeys[j++] = nameKey;
+                       }
+                       System.out.println("------------------------");
+                       System.out.println();
+                       System.out.println(":");
+                       int updateId = scan.nextInt();
+                       
+
+
+                    break;
 
             }
         }
