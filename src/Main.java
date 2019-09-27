@@ -69,6 +69,10 @@ public class Main {
                     int deleteId = scan.nextInt();
                     factory.deleteFromMapDepartment(deleteId,mapKey);
                     break;
+                case 3:
+                     System.out.println(factory.showDepartmentsFromMapDepartment());
+                    break;
+
             }
         }
 

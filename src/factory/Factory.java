@@ -35,6 +35,23 @@ public class Factory {
        return  departmentMap.containsKey(key);
     }
 
+    public String showDepartmentsFromMapDepartment(){
+        StringBuffer keys = new StringBuffer();
+        for (String key: departmentMap.keySet()) {
+            keys.append("-----------------------");
+            keys.append("\n");
+            keys.append("-------------");
+            keys.append("\n");
+            keys.append(key);
+            keys.append("\n");
+            keys.append("------------");
+            keys.append("\n");
+
+        }
+        keys.append("-----------------------");
+        return keys.toString();
+    }
+
 
     public String getName() {
         return name;
