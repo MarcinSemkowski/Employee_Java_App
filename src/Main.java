@@ -86,10 +86,21 @@ public class Main {
                        System.out.println();
                        System.out.println(":");
                        int updateId = scan.nextInt();
+
+                       System.out.println("Imię:");
+                       String nameUpdateDep = scan.next();
+
+                       System.out.println("Nocna Zmiana: ");
+                       System.out.println("True. Tak");
+                       System.out.println("False. Nie");
+                       boolean nightShiftUpdate = scan.nextBoolean();
                        
 
 
-                    break;
+
+
+
+                       break;
 
             }
         }
