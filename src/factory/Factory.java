@@ -52,6 +52,21 @@ public class Factory {
         return keys.toString();
     }
 
+    public boolean updateToMapDepartment(int index,String[] keys,String nameUpdateDep,boolean updateNightShift){
+
+           String updateDepKey = keys[index];
+
+           if(departmentMap.containsKey(updateDepKey)){
+               Department updateDep = departmentMap.get(updateDepKey);
+               updateDep.setName(nameUpdateDep);
+               updateDep.setNightShift(updateNightShift);
+               departmentMap.replace(updateDepKey,updateDep);
+              return true;
+           }else{
+               return false;
+           }
+    }
+
 
     public String getName() {
         return name;
