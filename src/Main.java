@@ -94,7 +94,8 @@ public class Main {
                        System.out.println("True. Tak");
                        System.out.println("False. Nie");
                        boolean nightShiftUpdate = scan.nextBoolean();
-                       
+
+                       factory.updateToMapDepartment(updateId,mapKeys,nameUpdateDep,nightShiftUpdate);
 
 
 

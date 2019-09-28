@@ -57,10 +57,11 @@ public class Factory {
            String updateDepKey = keys[index];
 
            if(departmentMap.containsKey(updateDepKey)){
-               Department updateDep = departmentMap.get(updateDepKey);
-               updateDep.setName(nameUpdateDep);
-               updateDep.setNightShift(updateNightShift);
-               departmentMap.replace(updateDepKey,updateDep);
+               Department oldDep = departmentMap.get(updateDepKey);
+               departmentMap.remove(updateDepKey,oldDep);
+               Department newDep = new Department(nameUpdateDep);
+               newDep.setNightShift(updateNightShift);
+               departmentMap.put(newDep.getName(),newDep);
               return true;
            }else{
                return false;
