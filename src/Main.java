@@ -1,5 +1,7 @@
 import factory.Factory;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -19,25 +21,22 @@ public class Main {
         menu();
     }
 
-
     private static void menu() {
         int menuNum = -1;
 
 
         while (menuNum != 0) {
             System.out.println("Witaj w " + nameFactory);
-            System.out.println("1. dodać kadrę \n" +
-                    "\n" +
-                    "2. usunąć kadrę\n" +
-                    "\n" +
-                    "\n" +
-                    "3. zobaczyć kadry \n" +
-                    "\n" +
-                    "4. zaktualizować kadrę\n" +
-                    "\n" +
-                    "5. sortować kadrę\n" +
-                    "\n" +
-                    "0. by zakończyć ");
+            List<String> menuList = Arrays.asList(
+                    "1. dodać kadrę \n"
+                    ,"2. usunąć kadrę\n"
+                    ,"3. zobaczyć kadry \n"
+                    ,"4. zaktualizować kadrę\n"
+                    ,"5. sortować kadrę\n"
+                    ,"0. by zakończyć "
+            );
+            menuList.stream().forEach(System.out::println);
+
             System.out.println("----------------------");
             System.out.println();
 
@@ -47,12 +46,16 @@ public class Main {
                     System.out.println("Imię:");
                     String nameDep = scan.next();
 
+
+
                     System.out.println("Nocna Zmiana: ");
                     System.out.println("True. Tak");
                     System.out.println("False. Nie");
-                     boolean isNightShift = scan.nextBoolean();
+                    boolean isNightShift = scan.nextBoolean();
 
-                      factory.addToMapDepartment(nameDep,isNightShift);
+
+
+                    factory.addToMapDepartment(nameDep,isNightShift);
                     break;
                 case 2:
                     System.out.println("Wybierz kadrę, by usunąć.");
@@ -94,19 +97,19 @@ public class Main {
                        System.out.println("True. Tak");
                        System.out.println("False. Nie");
                        boolean nightShiftUpdate = scan.nextBoolean();
-
                        factory.updateToMapDepartment(updateId,mapKeys,nameUpdateDep,nightShiftUpdate);
-
-
-
-
-
                        break;
+                       case 5:
+                           factory.showSortDepartaments();
+                             int sortId = scan.nextInt();
+                           factory.sortDepartments(sortId);
+                           break;
 
             }
         }
 
     }
+
 
     private static void departmentMenu() {
         int menuNum = -1;

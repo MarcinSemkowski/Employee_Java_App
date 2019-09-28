@@ -2,8 +2,7 @@ package factory;
 
 import factory.employee.Employee;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Factory {
 
@@ -67,6 +66,21 @@ public class Factory {
                return false;
            }
     }
+
+    public void showSortDepartaments(){
+        List<String> sortDepMethods = Arrays.asList(
+                "1.Alfabetycznie  \n"
+        );
+
+    }
+
+
+    public void sortDepartments(int index){
+        Comparator<String> comparatorAlphabeticalOrder = Comparator.naturalOrder();
+        departmentMap.keySet().stream().sorted(comparatorAlphabeticalOrder);
+
+    }
+
 
 
     public String getName() {
