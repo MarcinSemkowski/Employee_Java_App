@@ -3,6 +3,10 @@ package factory;
 import factory.employee.Employee;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 public class Factory {
 
@@ -71,15 +75,34 @@ public class Factory {
         List<String> sortDepMethods = Arrays.asList(
                 "1.Alfabetycznie  \n"
         );
+        sortDepMethods
+                .stream()
+                .forEach(System.out::println);
+    }
+
+
+    public Map<String,Department> sortDepartments(int index){
+       switch (index){
+           case 0:
+              Comparator<String> keysComparator = Comparator.naturalOrder();
+             return departmentMap
+                     .entrySet()
+                     .stream()
+                     .sorted(Map.Entry.comparingByKey(keysComparator))
+                     .collect(toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)-> e1,LinkedHashMap::new));
+
+
+
+
+
+              default:
+                 return null;
+       }
 
     }
 
 
-    public void sortDepartments(int index){
-        Comparator<String> comparatorAlphabeticalOrder = Comparator.naturalOrder();
-        departmentMap.keySet().stream().sorted(comparatorAlphabeticalOrder);
 
-    }
 
 
 
