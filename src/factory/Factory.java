@@ -71,7 +71,7 @@ public class Factory {
            }
     }
 
-    public void showSortDepartaments(){
+    public void showSortDepartments(){
         List<String> sortDepMethods = Arrays.asList(
                 "1.Alfabetycznie  \n"
         );
@@ -118,5 +118,7 @@ public class Factory {
         return departmentMap;
     }
 
-
+    public void setDepartmentMap(Map<String, Department> departmentMap) {
+        this.departmentMap = departmentMap;
+    }
 }

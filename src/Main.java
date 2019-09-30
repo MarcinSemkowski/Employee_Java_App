@@ -33,6 +33,7 @@ public class Main {
                     ,"3. zobaczyć kadry \n"
                     ,"4. zaktualizować kadrę\n"
                     ,"5. sortować kadrę\n"
+                    ,"6. By znaleźć po: \n"
                     ,"0. by zakończyć "
             );
             menuList.stream().forEach(System.out::println);
@@ -100,9 +101,9 @@ public class Main {
                        factory.updateToMapDepartment(updateId,mapKeys,nameUpdateDep,nightShiftUpdate);
                        break;
                        case 5:
-                           factory.showSortDepartaments();
+                           factory.showSortDepartments();
                              int sortId = scan.nextInt();
-                           factory.sortDepartments(sortId);
+                           factory.setDepartmentMap(factory.sortDepartments(sortId));
                            break;
 
             }
