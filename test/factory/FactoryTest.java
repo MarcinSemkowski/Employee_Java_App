@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -86,6 +89,39 @@ public class FactoryTest {
         boolean isUpdated = factory.updateToMapDepartment(indexTest, keysTest, updateDepTest, true);
         //then
         assertTrue(isUpdated);
+    }
+
+    @Test
+    public void sortDepartments(){
+        //given
+        int caseNumTest = 0;
+        Department department = new Department("Grafik");
+        department.setNightShift(false);
+        Department department1 = new Department("Spedytor");
+        Department department2 = new Department("Automatyk");
+        Department department3 = new Department("Budowlaniec");
+        Department department4 = new Department("Holowniczy");
+        Department department5 = new Department("Ceglarz");
+
+        //when
+        Map<String,Department> departmentMapTest = new LinkedHashMap<>();
+        factory.getDepartmentMap().put(department.getName(),department);
+        factory.getDepartmentMap().put(department1.getName(),department1);
+        factory.getDepartmentMap().put(department2.getName(),department2);
+        factory.getDepartmentMap().put(department3.getName(),department3);
+        factory.getDepartmentMap().put(department4.getName(),department4);
+        factory.getDepartmentMap().put(department5.getName(),department5);
+        departmentMapTest.put(department.getName(),department);
+        departmentMapTest.put(department1.getName(),department1);
+        departmentMapTest.put(department2.getName(),department2);
+        departmentMapTest.put(department3.getName(),department3);
+        departmentMapTest.put(department4.getName(),department4);
+        departmentMapTest.put(department5.getName(),department5);
+
+        //then
+         assertNotSame(departmentMapTest,factory.sortDepartments(0));
+
+
 
     }
 }
