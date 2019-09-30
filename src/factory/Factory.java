@@ -80,6 +80,16 @@ public class Factory {
                 .forEach(System.out::println);
     }
 
+    public void showFindByMethods(){
+        List<String> methodsNames = Arrays.asList(
+                "1.Znajdź po imieniu \n"
+                ,"2.Znajdz po nocnej zmianie");
+
+        methodsNames
+                .stream()
+                .forEach(System.out::println);
+    }
+
 
     public Map<String,Department> sortDepartments(int index){
        switch (index){
@@ -90,12 +100,7 @@ public class Factory {
                      .stream()
                      .sorted(Map.Entry.comparingByKey(keysComparator))
                      .collect(toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)-> e1,LinkedHashMap::new));
-
-
-
-
-
-              default:
+             default:
                  return null;
        }
 

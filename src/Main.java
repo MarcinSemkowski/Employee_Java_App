@@ -29,12 +29,12 @@ public class Main {
             System.out.println("Witaj w " + nameFactory);
             List<String> menuList = Arrays.asList(
                     "1. dodać kadrę \n"
-                    ,"2. usunąć kadrę\n"
-                    ,"3. zobaczyć kadry \n"
-                    ,"4. zaktualizować kadrę\n"
-                    ,"5. sortować kadrę\n"
-                    ,"6. By znaleźć po: \n"
-                    ,"0. by zakończyć "
+                    , "2. usunąć kadrę\n"
+                    , "3. zobaczyć kadry \n"
+                    , "4. zaktualizować kadrę\n"
+                    , "5. sortować kadrę\n"
+                    , "6. By znaleźć po: \n"
+                    , "0. by zakończyć "
             );
             menuList.stream().forEach(System.out::println);
 
@@ -48,15 +48,13 @@ public class Main {
                     String nameDep = scan.next();
 
 
-
                     System.out.println("Nocna Zmiana: ");
                     System.out.println("True. Tak");
                     System.out.println("False. Nie");
                     boolean isNightShift = scan.nextBoolean();
 
 
-
-                    factory.addToMapDepartment(nameDep,isNightShift);
+                    factory.addToMapDepartment(nameDep, isNightShift);
                     break;
                 case 2:
                     System.out.println("Wybierz kadrę, by usunąć.");
@@ -71,40 +69,46 @@ public class Main {
                     System.out.println();
                     System.out.println(":");
                     int deleteId = scan.nextInt();
-                    factory.deleteFromMapDepartment(deleteId,mapKey);
+                    factory.deleteFromMapDepartment(deleteId, mapKey);
                     break;
                 case 3:
-                     System.out.println(factory.showDepartmentsFromMapDepartment());
+                    System.out.println(factory.showDepartmentsFromMapDepartment());
                     break;
-                   case 4:
+                case 4:
 
-                       System.out.println("Wybierz kadrę. By zaktualizować.");
+                    System.out.println("Wybierz kadrę. By zaktualizować.");
 
-                       int j = 0;
-                       String[] mapKeys = new String[factory.getDepartmentMap().size()];
-                       for (String nameKey : factory.getDepartmentMap().keySet()) {
-                           System.out.println(j + ": " + nameKey);
-                           mapKeys[j++] = nameKey;
-                       }
-                       System.out.println("------------------------");
-                       System.out.println();
-                       System.out.println(":");
-                       int updateId = scan.nextInt();
+                    int j = 0;
+                    String[] mapKeys = new String[factory.getDepartmentMap().size()];
+                    for (String nameKey : factory.getDepartmentMap().keySet()) {
+                        System.out.println(j + ": " + nameKey);
+                        mapKeys[j++] = nameKey;
+                    }
+                    System.out.println("------------------------");
+                    System.out.println();
+                    System.out.println(":");
+                    int updateId = scan.nextInt();
 
-                       System.out.println("Imię:");
-                       String nameUpdateDep = scan.next();
+                    System.out.println("Imię:");
+                    String nameUpdateDep = scan.next();
 
-                       System.out.println("Nocna Zmiana: ");
-                       System.out.println("True. Tak");
-                       System.out.println("False. Nie");
-                       boolean nightShiftUpdate = scan.nextBoolean();
-                       factory.updateToMapDepartment(updateId,mapKeys,nameUpdateDep,nightShiftUpdate);
-                       break;
-                       case 5:
-                           factory.showSortDepartments();
-                             int sortId = scan.nextInt();
-                           factory.setDepartmentMap(factory.sortDepartments(sortId));
-                           break;
+                    System.out.println("Nocna Zmiana: ");
+                    System.out.println("True. Tak");
+                    System.out.println("False. Nie");
+                    boolean nightShiftUpdate = scan.nextBoolean();
+                    factory.updateToMapDepartment(updateId, mapKeys, nameUpdateDep, nightShiftUpdate);
+                    break;
+                case 5:
+                    factory.showSortDepartments();
+                    int sortId = scan.nextInt();
+                    factory.setDepartmentMap(factory.sortDepartments(sortId));
+                    break;
+                    case 6:
+                     factory.showFindByMethods();
+                     int finById = scan.nextInt();
+
+                        break;
+
 
             }
         }
