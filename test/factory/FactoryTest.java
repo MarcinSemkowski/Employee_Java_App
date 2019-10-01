@@ -120,8 +120,19 @@ public class FactoryTest {
 
         //then
          assertNotSame(departmentMapTest,factory.sortDepartments(0));
+    }
 
 
-
+    @Test
+    public void findByNameTest(){
+       //given
+        Department department = new Department("Holowniczy");
+        String expectedName = "Holowniczy";
+         //when
+        boolean isAdded = factory.addToMapDepartment(department.getName(),true);
+        String actualName = factory.findBy(expectedName);
+        //then
+        assertTrue(isAdded);
+        assertEquals(expectedName,actualName);
     }
 }
