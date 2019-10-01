@@ -15,6 +15,7 @@ public class Factory {
     private Map<String, Department> departmentMap;
 
 
+
     public Factory(String name) {
         this.name = name;
         departmentMap = new HashMap<>();
@@ -104,6 +105,15 @@ public class Factory {
                  return null;
        }
 
+    }
+
+
+    public String findBy(String name){
+        return  departmentMap
+                .keySet()
+                .stream()
+                .filter( x -> name.equals(x))
+                .collect(Collectors.joining());
     }
 
 

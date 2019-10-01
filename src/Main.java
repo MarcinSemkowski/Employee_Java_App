@@ -105,7 +105,14 @@ public class Main {
                     break;
                     case 6:
                      factory.showFindByMethods();
-                     int finById = scan.nextInt();
+                     int findById = scan.nextInt();
+                     switch (findById){
+                         case 1:
+                             System.out.println("Imię:");
+                            String name = scan.next();
+                             System.out.println(factory.findBy(name));
+                             break;
+                     }
 
                         break;
 
