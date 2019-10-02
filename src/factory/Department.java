@@ -41,4 +41,26 @@ public class Department {
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){
+            return true;
+        }
+        if(obj == null || this.getClass()!= obj.getClass()){
+            return false;
+        }
+        if(obj instanceof Department){
+            Department o = (Department) obj;
+            if (this.name.equals(o.getName()) && this.isNightShift() == o.isNightShift()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+        
+    }
 }
