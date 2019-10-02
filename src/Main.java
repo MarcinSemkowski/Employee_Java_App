@@ -112,6 +112,13 @@ public class Main {
                             String name = scan.next();
                              System.out.println(factory.findBy(name));
                              break;
+                         case 2:
+                             System.out.println("Nocna zmiana: ");
+                             System.out.println("True - Tak");
+                             System.out.println("False - Nie");
+                             boolean nightShiftGet = scan.nextBoolean();
+                              factory.findBy(nightShiftGet).stream().forEach(System.out::println);
+                             break;
                      }
 
                         break;

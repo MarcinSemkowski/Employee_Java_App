@@ -116,6 +116,17 @@ public class Factory {
                 .collect(Collectors.joining());
     }
 
+    public Set<String> findBy(boolean nightShift){
+        return departmentMap
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isNightShift() == nightShift)
+                .map(key -> key.getKey())
+                .collect(Collectors.toSet());
+
+
+    }
+
 
 
 
