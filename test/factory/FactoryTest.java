@@ -6,9 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -134,5 +132,45 @@ public class FactoryTest {
         //then
         assertTrue(isAdded);
         assertEquals(expectedName,actualName);
+    }
+    @Test
+    public void findByNightShift(){
+       //given
+        Department department = new Department("Grafik");
+        department.setNightShift(false);
+        Department department1 = new Department("Spedytor");
+        Department department2 = new Department("Automatyk");
+        Department department3 = new Department("Budowlaniec");
+        Department department4 = new Department("Holowniczy");
+        Department department5 = new Department("Ceglarz");
+        boolean nightShift = true;
+        //when
+        factory.addToMapDepartment(department.getName(),true);
+        factory.addToMapDepartment(department1.getName(),false);
+        factory.addToMapDepartment(department2.getName(),false);
+        factory.addToMapDepartment(department3.getName(),false);
+        factory.addToMapDepartment(department4.getName(),true);
+        factory.addToMapDepartment(department5.getName(),true);
+        Set<String> setTest = new HashSet<>();
+        setTest.add("Grafik");
+        setTest.add("Holowniczy");
+        setTest.add("Ceglarz");
+
+
+        //then
+        assertEquals(setTest,factory.findBy(nightShift));
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
