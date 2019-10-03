@@ -31,8 +31,8 @@ public class Factory {
        return departmentMap.containsKey(newDep.getName());
     }
 
-    public boolean deleteFromMapDepartment(int index,String[] arrayKey){
-       String key = arrayKey[index];
+    public boolean deleteFromMapDepartment(int index, List arrayKey){
+       String key = (String) arrayKey.get(index);
        departmentMap.remove(key);
         System.out.println("Poprawnie Usunięto: " + key);
         System.out.println("-------------------------------");
