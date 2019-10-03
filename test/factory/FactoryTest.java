@@ -1,6 +1,7 @@
 package factory;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -90,7 +91,7 @@ public class FactoryTest {
     }
 
     @Test
-    public void sortDepartments(){
+    public void sortDepartmentsAlphabetically(){
         //given
         int caseNumTest = 0;
         Department department = new Department("Grafik");
@@ -118,6 +119,30 @@ public class FactoryTest {
 
         //then
          assertNotSame(departmentMapTest,factory.sortDepartments(0));
+    }
+    @Test
+    public void sortDepartmentsBaseOnNightShift(){
+        //given
+        Department department = new Department("Grafik");
+        Department department1 = new Department("Spedytor");
+        Department department2 = new Department("Automatyk");
+        Department department3 = new Department("Budowlaniec");
+        Department department4 = new Department("Holowniczy");
+        Department department5 = new Department("Ceglarz");
+        //when
+         factory.addToMapDepartment(department.getName(),true);
+        factory.addToMapDepartment(department1.getName(),true);
+        factory.addToMapDepartment(department2.getName(),true);
+        factory.addToMapDepartment(department3.getName(),true);
+        factory.addToMapDepartment(department4.getName(),false);
+        factory.addToMapDepartment(department5.getName(),false);
+
+
+
+        Map<String,Department> sortTest = factory.sortDepartments(2);
+        //then
+        assertNotSame(sortTest,factory.getDepartmentMap());
+
     }
 
 
@@ -155,22 +180,7 @@ public class FactoryTest {
         setTest.add("Grafik");
         setTest.add("Holowniczy");
         setTest.add("Ceglarz");
-
-
         //then
         assertEquals(setTest,factory.findBy(nightShift));
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
