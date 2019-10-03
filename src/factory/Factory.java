@@ -41,12 +41,13 @@ public class Factory {
 
     public String showDepartmentsFromMapDepartment(){
         StringBuffer keys = new StringBuffer();
+        int i =1;
         for (String key: departmentMap.keySet()) {
             keys.append("-----------------------");
             keys.append("\n");
             keys.append("-------------");
             keys.append("\n");
-            keys.append(key);
+            keys.append( i+++ " " + key);
             keys.append("\n");
             keys.append("------------");
             keys.append("\n");

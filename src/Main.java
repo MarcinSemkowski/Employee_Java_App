@@ -73,6 +73,10 @@ public class Main {
                     break;
                 case 3:
                     System.out.println(factory.showDepartmentsFromMapDepartment());
+                    System.out.println(" ");
+                    System.out.println("0. By wyjść");
+                    int depId = scan.nextInt();
+                    System.out.println("");
                     break;
                 case 4:
 

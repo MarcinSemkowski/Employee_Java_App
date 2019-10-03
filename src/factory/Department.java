@@ -2,6 +2,8 @@ package factory;
 
 import factory.employee.Employee;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -17,6 +19,23 @@ public class Department {
         this.name = name;
         this.employees = new TreeSet<>();
     }
+
+
+    public void showEmployeeMethods(){
+        List<String> employeeMethods =Arrays.asList(
+                "1. By dodać pracownika do \n"
+                ,"2 By usunąć pracownika z \n"
+                ,"3. By zaktualizować pracownika \n "
+        );
+        employeeMethods
+                .stream()
+                .forEach(System.out::println);
+    }
+
+
+
+
+
 
     public String getName() {
         return name;
