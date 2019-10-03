@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -42,12 +43,11 @@ public class FactoryTest {
         //given
         departmentTest.setNightShift(true);
         factory.addToMapDepartment(departmentTest.getName(), departmentTest.isNightShift());
-        String[] arrayKeyTest = new String[factory.getDepartmentMap().size()];
-        int i = 0;
-        //when
-        for (String keyTest : factory.getDepartmentMap().keySet()) {
-            arrayKeyTest[i++] = keyTest;
-        }
+
+       List<String> arrayKeyTest = factory.getDepartmentMap()
+              .keySet()
+              .stream()
+              .collect(Collectors.toList());
         //then
         assertFalse(factory.deleteFromMapDepartment(0, arrayKeyTest));
     }
