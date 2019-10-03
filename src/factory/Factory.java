@@ -75,6 +75,9 @@ public class Factory {
     public void showSortDepartments(){
         List<String> sortDepMethods = Arrays.asList(
                 "1.Alfabetycznie  \n"
+                ,"Po zmianie :"
+                ,"2. Nocna Zmiana"
+                ,"3. Brak nocnej zmiany."
         );
         sortDepMethods
                 .stream()
@@ -94,13 +97,26 @@ public class Factory {
 
     public Map<String,Department> sortDepartments(int index){
        switch (index){
-           case 0:
+           case 1:
               Comparator<String> keysComparator = Comparator.naturalOrder();
              return departmentMap
                      .entrySet()
                      .stream()
                      .sorted(Map.Entry.comparingByKey(keysComparator))
                      .collect(toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)-> e1,LinkedHashMap::new));
+           case 2:
+             return departmentMap
+                     .entrySet()
+                     .stream()
+                     .sorted((x,y) -> Boolean.compare(x.getValue().isNightShift(),y.getValue().isNightShift()))
+                     .collect(toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)-> e1,LinkedHashMap::new));
+
+           case 3:
+                      return  departmentMap.entrySet()
+                   .stream()
+                   .sorted((x,y) -> Boolean.compare(y.getValue().isNightShift(),x.getValue().isNightShift()))
+                   .collect(toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)-> e1,LinkedHashMap::new));
+
              default:
                  return null;
        }
@@ -146,5 +162,13 @@ public class Factory {
 
     public void setDepartmentMap(Map<String, Department> departmentMap) {
         this.departmentMap = departmentMap;
+    }
+
+    @Override
+    public String toString() {
+        return "Factory{" +
+                "name='" + name + '\'' +
+                ", departmentMap=" + departmentMap +
+                '}';
     }
 }

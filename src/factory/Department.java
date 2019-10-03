@@ -62,6 +62,15 @@ public class Department {
             return false;
         }
 
-        
+
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "name='" + name + '\'' +
+                ", nightShift=" + nightShift +
+                ", employees=" + employees +
+                '}';
     }
 }
