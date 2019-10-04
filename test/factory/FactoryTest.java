@@ -183,4 +183,21 @@ public class FactoryTest {
         //then
         assertEquals(setTest,factory.findBy(nightShift));
     }
+    @Test
+    public void selectedDepartmentTest(){
+        //given
+        Department testDep = new Department("Grafik");
+        Department department2 = new Department("Automatyk");
+        Department department4 = new Department("Holowniczy");
+        //when
+        factory.addToMapDepartment(testDep.getName(),false);
+        factory.addToMapDepartment(department2.getName(),true);
+        factory.addToMapDepartment(department4.getName(),true);
+        List<String> keyListTest = new LinkedList(factory.getDepartmentMap().keySet());
+        Department actualDepTest = factory.selectedDepartment(keyListTest,1);
+        Department expectedTest = new Department("Holowniczy");
+        expectedTest.setNightShift(true);
+        //then
+        assertEquals(actualDepTest,expectedTest);
+    }
 }

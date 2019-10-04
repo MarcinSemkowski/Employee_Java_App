@@ -89,7 +89,7 @@ public class Main {
                     System.out.println(" ");
                     System.out.println("0. By wyjść");
                     int depId = scan.nextInt();
-                    factory.choosedDepartment(mapKey,depId)
+                    factory.selectedDepartment(mapKey,depId)
                             .showEmployeeMethods();
                     int employeeMethodId = scan.nextInt();
 
