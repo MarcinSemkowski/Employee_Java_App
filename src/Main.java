@@ -89,8 +89,10 @@ public class Main {
                     System.out.println(" ");
                     System.out.println("0. By wyjść");
                     int depId = scan.nextInt();
+                    factory.choosedDepartment(mapKey,depId)
+                            .showEmployeeMethods();
+                    int employeeMethodId = scan.nextInt();
 
-                    System.out.println("");
                     break;
                 case 4:
 
@@ -151,20 +153,5 @@ public class Main {
 
     }
 
-
-    private static void departmentMenu() {
-        int menuNum = -1;
-        System.out.println("Witaj w " + nameFactory);
-        while (menuNum != 0) {
-
-            switch (menuNum) {
-                case 1:
-            }
-        }
-    }
-
-    private static void employeeMenu(int num) {
-        System.out.println("Witaj w " + nameFactory);
-    }
 
 }

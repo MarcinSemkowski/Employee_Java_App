@@ -1,11 +1,10 @@
 package factory;
 
-import factory.employee.Employee;
-
 import java.util.*;
-import java.util.stream.Collector;
+
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toMap;
 
 public class Factory {
@@ -55,6 +54,11 @@ public class Factory {
         }
         keys.append("-----------------------");
         return keys.toString();
+    }
+
+    public Department choosedDepartment(List<String> keyList,int index){
+      String key = keyList.get(index);
+       return  departmentMap.get(key);
     }
 
     public boolean updateToMapDepartment(int index,String[] keys,String nameUpdateDep,boolean updateNightShift){
