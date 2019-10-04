@@ -56,7 +56,7 @@ public class Factory {
         return keys.toString();
     }
 
-    public Department choosedDepartment(List<String> keyList,int index){
+    public Department selectedDepartment(List<String> keyList,int index){
       String key = keyList.get(index);
        return  departmentMap.get(key);
     }
