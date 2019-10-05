@@ -2,10 +2,7 @@ package factory;
 
 import factory.employee.Employee;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Department {
 
@@ -31,6 +28,22 @@ public class Department {
                 .stream()
                 .forEach(System.out::println);
     }
+
+    public void employeeMenu(int index, Scanner scan){
+       switch (index){
+           case 1:
+               System.out.println("Podaj imię:");
+               String name = scan.next();
+               System.out.println("Podaj wiek:");
+              int age = scan.nextInt();
+               System.out.println("Podaj doświadczenie:");
+               int  experience = scan.nextInt();
+               Employee employee = new Employee(name,age,this,experience);
+               employees.add(employee);
+           break;
+       }
+    }
+
 
 
 
