@@ -41,8 +41,12 @@ public class Department {
                Employee employee = new Employee(name,age,this,experience);
                employees.add(employee);
            break;
+           case 2:
+
        }
     }
+
+
 
 
 
@@ -97,6 +101,15 @@ public class Department {
         }
 
 
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 *  hash + (this.name == null ? 0 : name.hashCode());
+        hash = 31 * hash + (Boolean.hashCode(this.nightShift));
+        hash = 31 * hash + (this.employees.isEmpty() ?0 : employees.hashCode());
+        return hash;
     }
 
     @Override
