@@ -1,24 +1,26 @@
 package factory.employee;
 
+import factory.Department;
+
 import java.util.Map;
 import java.util.Set;
 
-public class Employee {
+public class Employee implements  Comparable<Employee> {
 
     private String name;
 
     private int age;
 
-    private String department;
+    private Department department;
 
     private int experience;
 
 
-    public Employee(String name, int age, String work) {
+    public Employee(String name, int age, Department department, int experience) {
         this.name = name;
         this.age = age;
-        this.department = work;
-
+        this.department = department;
+        this.experience = experience;
     }
 
     public int getExperience() {
@@ -45,11 +47,11 @@ public class Employee {
         this.age = age;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
@@ -88,5 +90,11 @@ public class Employee {
         result = 31 * result + (department == null ? 0 : department.hashCode());
         result = 31 * result + experience;
         return result;
+    }
+
+
+    @Override
+    public int compareTo(Employee o) {
+       return Integer.compare(this.getExperience(), o.getExperience());
     }
 }
