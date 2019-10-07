@@ -1,10 +1,10 @@
+import factory.Department;
 import factory.Factory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -59,7 +59,7 @@ public class Main {
                     boolean isNightShift = scan.nextBoolean();
 
 
-                    factory.addToMapDepartment(nameDep, isNightShift);
+                    factory.addToFactory(nameDep, isNightShift);
                     mapKey = factory.getDepartmentMap()
                             .keySet()
                             .stream()
@@ -78,7 +78,7 @@ public class Main {
                     System.out.println();
                     System.out.println(":");
                     int deleteId = scan.nextInt();
-                    factory.deleteFromMapDepartment(deleteId, mapKey);
+                    factory.deleteFromFactory(deleteId, mapKey);
                     mapKey = factory.getDepartmentMap()
                             .keySet()
                             .stream()
@@ -89,9 +89,21 @@ public class Main {
                     System.out.println(" ");
                     System.out.println("0. By wyjść");
                     int depId = scan.nextInt();
-                    factory.selectedDepartment(mapKey,depId)
-                            .showEmployeeMethods();
+                    if(depId == 0){
+                        continue;
+                    }
+                     Department selectDep = factory.selectedDepartment(mapKey,depId);
+                    System.out.println("Witaj w " + selectDep.getName());
+                     selectDep.showEmployeeMethods()
+                             .stream()
+                             .forEach(System.out::println);
                     int employeeMethodId = scan.nextInt();
+                    System.out.println(" ");
+                    System.out.println("0. By wyjść");
+                    if(employeeMethodId == 0){
+                        continue;
+                    }
+                    selectDep.employeeMenu(employeeMethodId,scan);
 
                     break;
                 case 4:

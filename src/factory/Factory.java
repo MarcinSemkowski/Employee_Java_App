@@ -23,14 +23,14 @@ public class Factory {
 
 
 
-    public boolean addToMapDepartment(String nameDep,boolean nightShift){
+    public boolean addToFactory(String nameDep, boolean nightShift){
         Department newDep = new Department(nameDep);
         newDep.setNightShift(nightShift);
         departmentMap.put(newDep.getName(), newDep);
        return departmentMap.containsKey(newDep.getName());
     }
 
-    public boolean deleteFromMapDepartment(int index, List arrayKey){
+    public boolean deleteFromFactory(int index, List arrayKey){
        String key = (String) arrayKey.get(index);
        departmentMap.remove(key);
         System.out.println("Poprawnie Usunięto: " + key);
