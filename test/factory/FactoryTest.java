@@ -1,12 +1,8 @@
 package factory;
 
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,7 +29,7 @@ public class FactoryTest {
         //given
         departmentTest.setNightShift(false);
         //when
-        boolean isDepAdded = factory.addToMapDepartment(departmentTest.getName(), departmentTest.isNightShift());
+        boolean isDepAdded = factory.addToFactory(departmentTest.getName(), departmentTest.isNightShift());
         //then
         assertTrue(isDepAdded);
     }
@@ -42,14 +38,14 @@ public class FactoryTest {
     public void deleteFromMapDepartment() {
         //given
         departmentTest.setNightShift(true);
-        factory.addToMapDepartment(departmentTest.getName(), departmentTest.isNightShift());
+        factory.addToFactory(departmentTest.getName(), departmentTest.isNightShift());
 
        List<String> arrayKeyTest = factory.getDepartmentMap()
               .keySet()
               .stream()
               .collect(Collectors.toList());
         //then
-        assertFalse(factory.deleteFromMapDepartment(0, arrayKeyTest));
+        assertFalse(factory.deleteFromFactory(0, arrayKeyTest));
     }
 
     @Test
@@ -77,7 +73,7 @@ public class FactoryTest {
     public void updateToMapDepartment() {
         //given
         int indexTest = 0;
-        factory.addToMapDepartment("developers", false);
+        factory.addToFactory("developers", false);
         String[] keysTest = new String[factory.getDepartmentMap().size()];
         String updateDepTest = " dep";
         int i = 0;
@@ -130,12 +126,12 @@ public class FactoryTest {
         Department department4 = new Department("Holowniczy");
         Department department5 = new Department("Ceglarz");
         //when
-         factory.addToMapDepartment(department.getName(),true);
-        factory.addToMapDepartment(department1.getName(),true);
-        factory.addToMapDepartment(department2.getName(),true);
-        factory.addToMapDepartment(department3.getName(),true);
-        factory.addToMapDepartment(department4.getName(),false);
-        factory.addToMapDepartment(department5.getName(),false);
+         factory.addToFactory(department.getName(),true);
+        factory.addToFactory(department1.getName(),true);
+        factory.addToFactory(department2.getName(),true);
+        factory.addToFactory(department3.getName(),true);
+        factory.addToFactory(department4.getName(),false);
+        factory.addToFactory(department5.getName(),false);
 
 
 
@@ -152,7 +148,7 @@ public class FactoryTest {
         Department department = new Department("Holowniczy");
         String expectedName = "Holowniczy";
          //when
-        boolean isAdded = factory.addToMapDepartment(department.getName(),true);
+        boolean isAdded = factory.addToFactory(department.getName(),true);
         String actualName = factory.findBy(expectedName);
         //then
         assertTrue(isAdded);
@@ -170,12 +166,12 @@ public class FactoryTest {
         Department department5 = new Department("Ceglarz");
         boolean nightShift = true;
         //when
-        factory.addToMapDepartment(department.getName(),true);
-        factory.addToMapDepartment(department1.getName(),false);
-        factory.addToMapDepartment(department2.getName(),false);
-        factory.addToMapDepartment(department3.getName(),false);
-        factory.addToMapDepartment(department4.getName(),true);
-        factory.addToMapDepartment(department5.getName(),true);
+        factory.addToFactory(department.getName(),true);
+        factory.addToFactory(department1.getName(),false);
+        factory.addToFactory(department2.getName(),false);
+        factory.addToFactory(department3.getName(),false);
+        factory.addToFactory(department4.getName(),true);
+        factory.addToFactory(department5.getName(),true);
         Set<String> setTest = new HashSet<>();
         setTest.add("Grafik");
         setTest.add("Holowniczy");
@@ -190,9 +186,9 @@ public class FactoryTest {
         Department department2 = new Department("Automatyk");
         Department department4 = new Department("Holowniczy");
         //when
-        factory.addToMapDepartment(testDep.getName(),false);
-        factory.addToMapDepartment(department2.getName(),true);
-        factory.addToMapDepartment(department4.getName(),true);
+        factory.addToFactory(testDep.getName(),false);
+        factory.addToFactory(department2.getName(),true);
+        factory.addToFactory(department4.getName(),true);
         List<String> keyListTest = new LinkedList(factory.getDepartmentMap().keySet());
         Department actualDepTest = factory.selectedDepartment(keyListTest,1);
         Department expectedTest = new Department("Holowniczy");
