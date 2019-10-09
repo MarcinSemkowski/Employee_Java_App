@@ -27,26 +27,38 @@ public class Department {
         );
         return employeeMethods;
     }
+    public Employee employeeInfo(Scanner scan){
+        System.out.println("Podaj imię:");
+        String name = scan.next();
+        System.out.println("Podaj wiek:");
+        int age = scan.nextInt();
+        System.out.println("Podaj doświadczenie:");
+        int experience = scan.nextInt();
+        return new Employee(name,age,this,experience);
+    }
 
     public void employeeMenu(int index, Scanner scan) {
         switch (index) {
             case 1:
-                System.out.println("Podaj imię:");
-                String name = scan.next();
-                System.out.println("Podaj wiek:");
-                int age = scan.nextInt();
-                System.out.println("Podaj doświadczenie:");
-                int experience = scan.nextInt();
-                addEmployeeToDepartment(name, age, experience);
+                employeeInfo(scan);
+                addEmployeeToDepartment(employeeInfo(scan));
                 break;
+
+
+
 
 
         }
 
+
+
     }
 
-    public boolean addEmployeeToDepartment(String name, int age, int experience) {
-        employees.add(new Employee(name, age, this, experience));
+    public boolean addEmployeeToDepartment(Employee employee) {
+        employees.add(new Employee(employee.getName()
+                ,employee.getAge()
+                ,employee.getDepartment()
+                , employee.getExperience()));
         return true;
     }
 
