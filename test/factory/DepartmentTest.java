@@ -24,26 +24,40 @@ public class DepartmentTest {
 
     @Test
     public void showEmployeeMethodsTest() {
-      //given
+        //given
         List<String> employeeMethodsTest = Arrays.asList(
                 "1. By dodać pracownika do \n"
-                ,"2 By usunąć pracownika z \n"
-                ,"3. By zaktualizować pracownika \n "
+                , "2 By usunąć pracownika z \n"
+                , "3. By zaktualizować pracownika \n "
         );
         //then
-        assertThat(department.showEmployeeMethods(),is(employeeMethodsTest));
+        assertThat(department.showEmployeeMethods(), is(employeeMethodsTest));
     }
 
-     @Test
-    public void AddEmployeeTest(){
+    @Test
+    public void AddEmployeeTest() {
         //given
-          String name = "Mike";
-          int age = 25;
-          int experience = 3;
+        String name = "Mike";
+        int age = 25;
+        int experience = 3;
         //when
-         boolean isAdd = department.addEmployeeToDepartment(name,age,experience);
+        boolean isAdd = department.addEmployeeToDepartment(new Employee(name, age, department, experience));
+        //then
+        assertTrue(isAdd);
+    }
+
+    @Test
+    public void deleteEmployeeTest() {
+        //given
+        String name = "Mike";
+        int age = 25;
+        int experience = 3;
+        //when
+        boolean isAdd = department.addEmployeeToDepartment(new Employee(name, age, department, experience));
+        boolean isDeleted = department.deleteEmployee(new Employee(name, age, department, experience));
          //then
-         assertTrue(isAdd);
-     }
+        assertTrue(isAdd);
+        assertTrue(isDeleted);
+    }
 
 }
