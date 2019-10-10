@@ -46,16 +46,45 @@ public class Department {
             case 2:
                 deleteEmployee(employeeInfo(scan));
                 break;
-                
+            case 3:
+
+                Employee employee = employeeInfo(scan);
+                 if(employees.contains(employee)) {
+                     System.out.println("Podaj imię: " + "imię: " + employee.getName());
+                     String name = scan.next();
+                     System.out.println("Podaj wiek: " + "wiek: " + employee.getAge());
+                     int age = scan.nextInt();
+                     System.out.println("Podaj doświadczenie: " + "doświadczenie: " + employee.getExperience());
+                     int experience = scan.nextInt();
+                     updateEmployee(employee,new Employee(name,age,this,experience));
+
+                 }else{
+                     System.out.println("Nie ma takiego pracownika !");
+                 }
+
+
+                break;
+
+
         }
-
-
     }
+
+    public boolean updateEmployee(Employee employee,Employee updateEmployee){
+        if(employees.contains(employee)){
+            employees.remove(employee);
+            employees.add(updateEmployee);
+            return  true;
+        } else{
+            System.out.println("Nie ma takiego pracownika !");
+          return false;
+        }
+    }
+
 
     public boolean deleteEmployee(Employee employee){
         if (employees.contains(employee)) {
             employees.remove(employee);
-            System.out.println("Poprawnie usunięto " + employee + "z " + this.getName());
+            System.out.println("Poprawnie usunięto " + employee.getName() + "z " + this.getName());
             return true;
         } else {
             System.out.println("Nie ma takiego pracownika !");
