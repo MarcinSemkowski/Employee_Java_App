@@ -60,4 +60,23 @@ public class DepartmentTest {
         assertTrue(isDeleted);
     }
 
+    @Test
+    public void updateEmployeeTest(){
+        //given
+        String name = "Mike";
+        int age = 25;
+        int experience = 3;
+        Employee oldEmployee = new Employee(name,age,department,experience);
+        String updateName = "John";
+        int updateAge = 32;
+        int updateExperience = 7;
+
+        //when
+        boolean isAdd = department.addEmployeeToDepartment(oldEmployee);
+        boolean isUpdate = department.updateEmployee(oldEmployee,new Employee(updateName,updateAge,department,updateExperience));
+        //then
+        assertTrue(isAdd);
+        assertTrue(isUpdate);
+
+    }
 }
