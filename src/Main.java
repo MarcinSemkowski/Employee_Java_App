@@ -87,23 +87,23 @@ public class Main {
                 case 3:
                     System.out.println(factory.showDepartmentsFromMapDepartment());
                     System.out.println(" ");
-                    System.out.println("0. By wyjść");
+                    System.out.println("-1. By wyjść");
                     int depId = scan.nextInt();
-                    if(depId == 0){
+                    if(depId == -1){
                         continue;
                     }
-                     Department selectDep = factory.selectedDepartment(mapKey,depId);
-                    System.out.println("Witaj w " + selectDep.getName());
-                     selectDep.showEmployeeMethods()
+                     Department selectedDep = factory.selectedDepartment(mapKey,depId);
+                    System.out.println("Witaj w " + selectedDep.getName());
+                     selectedDep.showEmployeeMethods()
                              .stream()
                              .forEach(System.out::println);
                     int employeeMethodId = scan.nextInt();
                     System.out.println(" ");
-                    System.out.println("0. By wyjść");
-                    if(employeeMethodId == 0){
+                    System.out.println("-1. By wyjść");
+                    if(employeeMethodId == -1){
                         continue;
                     }
-                    selectDep.employeeMenu(employeeMethodId,scan);
+                    selectedDep.employeeMenu(employeeMethodId,scan);
 
                     break;
                 case 4:

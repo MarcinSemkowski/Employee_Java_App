@@ -40,7 +40,7 @@ public class Factory {
 
     public String showDepartmentsFromMapDepartment(){
         StringBuffer keys = new StringBuffer();
-        int i =1;
+        int i =0;
         for (String key: departmentMap.keySet()) {
             keys.append("-----------------------");
             keys.append("\n");
