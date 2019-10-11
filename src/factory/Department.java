@@ -24,9 +24,22 @@ public class Department {
                 "1. By dodać pracownika do \n"
                 , "2 By usunąć pracownika z \n"
                 , "3. By zaktualizować pracownika \n "
+                ,"4. By sortować  pracownika \n"
         );
         return employeeMethods;
     }
+
+    public List<String> showSortMethods(){
+        List<String> sortMethods = Arrays.asList(
+                "1.By sortować alfabetycznie  \n"
+                , " By sortować po wieku:\n"
+                ,"2. Od najstarszego do najmłodszego \n"
+                ,"3. Od najmłodszego do najstarszego \n "
+        );
+        return sortMethods;
+    }
+
+
 
     public Employee employeeInfo(Scanner scan) {
         System.out.println("Podaj imię:");
@@ -61,7 +74,8 @@ public class Department {
                  }else{
                      System.out.println("Nie ma takiego pracownika !");
                  }
-
+                 break;
+            case 4:
 
                 break;
 
