@@ -87,7 +87,6 @@ public class Employee implements  Comparable<Employee> {
         int result = 7;
         result = 31 * result + (name == null ? 0 : name.hashCode());
         result = 31 * result + age;
-        result = 31 * result + (department == null ? 0 : department.hashCode());
         result = 31 * result + experience;
         return result;
     }
@@ -96,5 +95,15 @@ public class Employee implements  Comparable<Employee> {
     @Override
     public int compareTo(Employee o) {
        return Integer.compare(this.getExperience(), o.getExperience());
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", department=" + department +
+                ", experience=" + experience +
+                '}';
     }
 }

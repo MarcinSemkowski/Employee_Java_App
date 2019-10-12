@@ -194,20 +194,13 @@ public class Department {
         hash = 31 * hash + (Boolean.hashCode(this.nightShift));
         Iterator i = employees.iterator();
         while(i.hasNext()){
-            Employee emp = (Employee) i.next();
+            Object emp =  i.next();
             hash = 31 * hash + (emp == null ? 0 : emp.hashCode());
         }
-        
+
         return hash;
     }
 
 
-    @Override
-    public String toString() {
-        return "Department{" +
-                "name='" + name + '\'' +
-                ", nightShift=" + nightShift +
-                ", employees=" + employees +
-                '}';
-    }
+
 }
