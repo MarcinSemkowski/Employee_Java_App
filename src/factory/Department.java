@@ -24,7 +24,7 @@ public class Department {
                 "1. By dodać pracownika do \n"
                 , "2 By usunąć pracownika z \n"
                 , "3. By zaktualizować pracownika \n "
-                ,"4. By sortować  pracownika \n"
+                ,"4. By sortować  pracowników \n"
         );
         return employeeMethods;
     }
@@ -38,6 +38,27 @@ public class Department {
         );
         return sortMethods;
     }
+
+    public void sortEmployees(int index){
+       switch(index){
+           case 1:
+               employees = sortAlphabetically();
+            break;
+       }
+    }
+
+
+    public Set<Employee> sortAlphabetically(){
+       return  employees
+                .stream()
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+
+
+
+
 
 
 
@@ -76,6 +97,10 @@ public class Department {
                  }
                  break;
             case 4:
+                 showSortMethods()
+                         .stream()
+                         .forEach(System.out::println);
+                   int sortId = scan.nextInt();
 
                 break;
 
