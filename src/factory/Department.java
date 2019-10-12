@@ -2,6 +2,7 @@ package factory;
 
 import factory.employee.Employee;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -191,7 +192,12 @@ public class Department {
         int hash = 7;
         hash = 31 * hash + (this.name == null ? 0 : name.hashCode());
         hash = 31 * hash + (Boolean.hashCode(this.nightShift));
-        hash = 31 * hash + (this.employees.isEmpty() ? 0 : employees.hashCode());
+        Iterator i = employees.iterator();
+        while(i.hasNext()){
+            Employee emp = (Employee) i.next();
+            hash = 31 * hash + (emp == null ? 0 : emp.hashCode());
+        }
+        
         return hash;
     }
 
