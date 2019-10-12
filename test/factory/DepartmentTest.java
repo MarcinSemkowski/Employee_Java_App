@@ -33,6 +33,18 @@ public class DepartmentTest {
         //then
         assertThat(department.showEmployeeMethods(), is(employeeMethodsTest));
     }
+    @Test
+    public void showSortMethodsTest(){
+       //given
+        List<String> sortMethodsTest = Arrays.asList(
+                "1.By sortować alfabetycznie  \n"
+                , " By sortować po wieku:\n"
+                ,"2. Od najstarszego do najmłodszego \n"
+                ,"3. Od najmłodszego do najstarszego \n "
+        );
+        //then
+        assertThat(department.showSortMethods(),is(sortMethodsTest));
+    }
 
     @Test
     public void AddEmployeeTest() {
