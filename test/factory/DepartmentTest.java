@@ -4,11 +4,10 @@ import factory.employee.Employee;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.*;
 
 public class DepartmentTest {
@@ -45,6 +44,30 @@ public class DepartmentTest {
         //then
         assertThat(department.showSortMethods(),is(sortMethodsTest));
     }
+    @Test
+    public void sortAlphabeticallyTest(){
+        //given
+        Employee employee = new Employee("Christopher",25,department,4);
+        Employee employee1 = new Employee("David",30,department,8);
+        Employee employee2 = new Employee("Alexander",30,department,8);
+        Employee employee3 = new Employee("Brandon",30,department,8);
+        Set<Employee> employeesTest = new HashSet<>();
+        //when
+        employeesTest.add(employee);
+        employeesTest.add(employee1);
+        employeesTest.add(employee2);
+        employeesTest.add(employee3);
+
+
+        department.addEmployeeToDepartment(employee);
+        department.addEmployeeToDepartment(employee1);
+        department.addEmployeeToDepartment(employee2);
+        department.addEmployeeToDepartment(employee3);
+        department.setEmployees(department.sortAlphabetically());
+        //then
+        assertThat(employeesTest,is(not(department.getEmployees())));
+    }
+
 
     @Test
     public void AddEmployeeTest() {
