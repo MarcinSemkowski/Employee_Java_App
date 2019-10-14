@@ -44,7 +44,17 @@ public class Department {
        switch(index){
            case 1:
                employees = sortAlphabetically();
+               employees
+                       .stream()
+                       .forEach(System.out::println);
             break;
+           case 2:
+               employees = sortByAgeReversed();
+               employees
+                       .stream()
+                       .forEach(System.out::println);
+               break;
+
        }
     }
 
@@ -55,6 +65,16 @@ public class Department {
                 .sorted(Comparator.naturalOrder())
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
+
+    public Set<Employee> sortByAgeReversed(){
+
+        return employees
+                .stream()
+                .sorted(Comparator.comparingInt(Employee::getAge).reversed())
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+    }
+
 
 
 
@@ -102,6 +122,7 @@ public class Department {
                          .stream()
                          .forEach(System.out::println);
                    int sortId = scan.nextInt();
+                   sortEmployees(sortId);
 
                 break;
 
