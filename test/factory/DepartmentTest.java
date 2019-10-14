@@ -76,6 +76,28 @@ public class DepartmentTest {
     }
 
     @Test
+    public void sortEmployeesByAge() {
+        //given
+        Set<Employee> employeeSetTest = new LinkedHashSet<>();
+        //when
+        employeeSetTest.add(employee2);
+        employeeSetTest.add(employee1);
+        employeeSetTest.add(employee3);
+        employeeSetTest.add(employee);
+
+        department.addEmployeeToDepartment(employee);
+        department.addEmployeeToDepartment(employee1);
+        department.addEmployeeToDepartment(employee2);
+        department.addEmployeeToDepartment(employee3);
+
+        //then
+        assertThat(department.sortByAge(),is(employeeSetTest));
+
+
+    }
+
+
+    @Test
     public void sortEmployeesByAgeReversed() {
         //given
         Set<Employee> employeeSetTest = new LinkedHashSet<>();
@@ -89,9 +111,9 @@ public class DepartmentTest {
         department.addEmployeeToDepartment(employee1);
         department.addEmployeeToDepartment(employee2);
         department.addEmployeeToDepartment(employee3);
-        department.setEmployees(department.sortByAgeReversed());
+
         //then
-        assertThat(department.getEmployees(),is(employeeSetTest));
+        assertThat(department.sortByAgeReversed(),is(employeeSetTest));
 
 
     }
