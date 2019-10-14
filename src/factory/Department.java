@@ -26,6 +26,7 @@ public class Department {
                 , "2 By usunąć pracownika z \n"
                 , "3. By zaktualizować pracownika \n "
                 ,"4. By sortować  pracowników \n"
+                ,"5. By zobaczyć pracowników "
         );
         return employeeMethods;
     }
@@ -49,10 +50,16 @@ public class Department {
                        .forEach(System.out::println);
             break;
            case 2:
-               employees = sortByAgeReversed();
+               employees = sortByAge();
                employees
                        .stream()
                        .forEach(System.out::println);
+               break;
+           case 3:
+              employees = sortByAgeReversed();
+              employees
+                      .stream()
+                      .forEach(System.out::println);
                break;
 
        }
@@ -62,10 +69,18 @@ public class Department {
     public Set<Employee> sortAlphabetically(){
        return  employees
                 .stream()
-                .sorted(Comparator.naturalOrder())
+                .sorted(Comparator.comparing(Employee::getName))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
+    public Set<Employee> sortByAge(){
+
+        return employees
+                .stream()
+                .sorted(Comparator.comparingInt(Employee::getAge))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+    }
     public Set<Employee> sortByAgeReversed(){
 
         return employees
@@ -74,6 +89,8 @@ public class Department {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
     }
+
+
 
 
 
@@ -125,6 +142,11 @@ public class Department {
                    sortEmployees(sortId);
 
                 break;
+            case 5:
+               employees
+                       .stream()
+                       .forEach(System.out::println);
+                break;
 
 
         }
@@ -154,11 +176,13 @@ public class Department {
     }
 
     public boolean addEmployeeToDepartment(Employee employee) {
-        employees.add(new Employee(employee.getName()
+        if(employees.add(new Employee(employee.getName()
                 , employee.getAge()
                 , employee.getDepartment()
-                , employee.getExperience()));
-        return true;
+                , employee.getExperience()))) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -221,7 +245,5 @@ public class Department {
 
         return hash;
     }
-
-
 
 }

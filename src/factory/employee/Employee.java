@@ -71,7 +71,7 @@ public class Employee implements  Comparable<Employee> {
             if (this.name.equals(employeeObject.name) &&
                     (this.age == employeeObject.age) &&
                     (this.department.equals(employeeObject.department)) &&
-                    (this.experience == this.experience)) {
+                    (this.experience == employeeObject.experience)) {
                 return true;
             } else {
                 return false;
