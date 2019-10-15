@@ -1,5 +1,6 @@
 import factory.Department;
 import factory.Factory;
+import factory.menu_strategy.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ public class Main {
     private static String nameFactory;
     private static Factory factory;
    private static List<String> mapKey = new ArrayList<>();
+    private static CaseMenu caseMenu;
 
     public static void main(String[] args) {
 
@@ -21,6 +23,7 @@ public class Main {
         nameFactory = scan.nextLine();
         System.out.println("------------------------");
         factory = new Factory(nameFactory);
+        caseMenu = new CaseMenu(factory,scan);
 
 
         menu();
@@ -49,90 +52,19 @@ public class Main {
             menuNum = scan.nextInt();
             switch (menuNum) {
                 case 1:
-                    System.out.println("Imię:");
-                    String nameDep = scan.next();
-
-
-                    System.out.println("Nocna Zmiana: ");
-                    System.out.println("True. Tak");
-                    System.out.println("False. Nie");
-                    boolean isNightShift = scan.nextBoolean();
-
-
-                    factory.addToFactory(nameDep, isNightShift);
-                    mapKey = factory.getDepartmentMap()
-                            .keySet()
-                            .stream()
-                            .collect(Collectors.toList());
+                    caseMenu.setCaseStrategy(new AddToFactory());
+                    caseMenu.runTask();
                     break;
                 case 2:
-                    System.out.println("Wybierz kadrę, by usunąć.");
-
-                    int i = 0;
-
-
-                    for (String key : mapKey) {
-                        System.out.println(i++ + " " + key);
-                    }
-                    System.out.println("------------------------");
-                    System.out.println();
-                    System.out.println(":");
-                    int deleteId = scan.nextInt();
-                    factory.deleteFromFactory(deleteId, mapKey);
-                    mapKey = factory.getDepartmentMap()
-                            .keySet()
-                            .stream()
-                            .collect(Collectors.toList());
+                     caseMenu.setCaseStrategy(new DeleteFromFactory());
+                     caseMenu.runTask();
                     break;
                 case 3:
-                    System.out.println(factory.showDepartmentsFromMapDepartment());
-                    System.out.println(" ");
-                    System.out.println("-1. By wyjść");
-                    int depId = scan.nextInt();
-                    if(depId == -1){
-                        continue;
-                    }
-                     Department selectedDep = factory.selectedDepartment(mapKey,depId);
-                    System.out.println("Witaj w " + selectedDep.getName());
-                     selectedDep.showEmployeeMethods()
-                             .stream()
-                             .forEach(System.out::println);
-                    int employeeMethodId = scan.nextInt();
-                    System.out.println(" ");
-                    System.out.println("-1. By wyjść");
-                    if(employeeMethodId == -1){
-                        continue;
-                    }
-                    selectedDep.employeeMenu(employeeMethodId,scan);
-
-                    break;
+                   caseMenu.setCaseStrategy(new ShowDepartamets());
+                   caseMenu.runTask();
                 case 4:
-
-                    System.out.println("Wybierz kadrę. By zaktualizować.");
-
-                    int j = 0;
-                    String[] mapKeys = new String[factory.getDepartmentMap().size()];
-                    for (String nameKey : factory.getDepartmentMap().keySet()) {
-                        System.out.println(j + ": " + nameKey);
-                        mapKeys[j++] = nameKey;
-                    }
-                    System.out.println("------------------------");
-                    System.out.println();
-                    System.out.println(":");
-                    int updateId = scan.nextInt();
-
-                    System.out.println("Imię:");
-                    String nameUpdateDep = scan.next();
-
-                    System.out.println("Nocna Zmiana: ");
-                    System.out.println("True. Tak");
-                    System.out.println("False. Nie");
-                    boolean nightShiftUpdate = scan.nextBoolean();
-                    factory.updateToMapDepartment(updateId, mapKeys, nameUpdateDep, nightShiftUpdate);
-                    mapKey = factory.getDepartmentMap()
-                            .keySet()
-                            .stream()
-                            .collect(Collectors.toList());
+                    caseMenu.setCaseStrategy(new UpdateDepartmentFromFactory());
+                    caseMenu.runTask();
                     break;
                 case 5:
                     factory.showSortDepartments();
