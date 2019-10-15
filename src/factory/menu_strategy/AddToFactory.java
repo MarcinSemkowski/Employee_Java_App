@@ -12,7 +12,7 @@ public class AddToFactory implements MenuStrategy {
 
     Scanner scan = new Scanner(System.in);
 
-    private static List<String> mapKey = new ArrayList<>();
+
 
     @Override
     public void runCaseTask(Factory factory) {
@@ -27,15 +27,11 @@ public class AddToFactory implements MenuStrategy {
 
 
         factory.addToFactory(nameDep, isNightShift);
-        mapKey = factory.getDepartmentMap()
+        List<String> listKeys = factory.getDepartmentMap()
                 .keySet()
                 .stream()
                 .collect(Collectors.toList());
+        MapKeys.getInstance().setMapKeys(listKeys);
     }
-
-    public static List<String> getMapKey() {
-        return mapKey;
-    }
-
 
 }
