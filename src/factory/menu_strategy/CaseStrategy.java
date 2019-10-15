@@ -4,7 +4,6 @@ import factory.Factory;
 
 import java.util.Scanner;
 
-public interface MenuStrategy {
-     void runCaseTask();
-
+public interface CaseStrategy {
+     void runCaseTask(Factory factory, Scanner scan);
 }

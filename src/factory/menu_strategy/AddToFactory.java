@@ -3,24 +3,16 @@ package factory.menu_strategy;
 
 import factory.Factory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class AddToFactory implements MenuStrategy {
-
-    private Factory factory;
-    private Scanner scan;
+public class AddToFactory implements CaseStrategy {
 
 
-    public AddToFactory(Factory factory, Scanner scan) {
-        this.factory = factory;
-        this.scan = scan;
-    }
 
     @Override
-    public void runCaseTask() {
+    public void runCaseTask(Factory factory,Scanner scan) {
         System.out.println("Imię:");
         String nameDep = scan.next();
 
