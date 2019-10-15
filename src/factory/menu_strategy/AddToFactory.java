@@ -10,12 +10,17 @@ import java.util.stream.Collectors;
 
 public class AddToFactory implements MenuStrategy {
 
-    Scanner scan = new Scanner(System.in);
+    private Factory factory;
+    private Scanner scan;
 
 
+    public AddToFactory(Factory factory, Scanner scan) {
+        this.factory = factory;
+        this.scan = scan;
+    }
 
     @Override
-    public void runCaseTask(Factory factory) {
+    public void runCaseTask() {
         System.out.println("Imię:");
         String nameDep = scan.next();
 
