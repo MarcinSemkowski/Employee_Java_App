@@ -13,7 +13,7 @@ public class Main {
     private static Scanner scan = new Scanner(System.in);
     private static String nameFactory;
     private static Factory factory;
-   private static List<String> mapKey = new ArrayList<>();
+    private static List<String> mapKey = new ArrayList<>();
     private static CaseMenu caseMenu;
 
     public static void main(String[] args) {
@@ -23,11 +23,12 @@ public class Main {
         nameFactory = scan.nextLine();
         System.out.println("------------------------");
         factory = new Factory(nameFactory);
-        caseMenu = new CaseMenu(factory,scan);
+        caseMenu = new CaseMenu(factory, scan);
 
 
         menu();
     }
+
 
     private static void menu() {
         int menuNum = -1;
@@ -42,6 +43,7 @@ public class Main {
                     , "4. zaktualizować kadrę\n"
                     , "5. sortować kadrę\n"
                     , "6. By znaleźć po: \n"
+                    ,"7 By dodać do pliku wybrany dział"
                     , "0. by zakończyć "
             );
             menuList.stream().forEach(System.out::println);
@@ -56,12 +58,13 @@ public class Main {
                     caseMenu.runTask();
                     break;
                 case 2:
-                     caseMenu.setCaseStrategy(new DeleteFromFactory());
-                     caseMenu.runTask();
+                    caseMenu.setCaseStrategy(new DeleteFromFactory());
+                    caseMenu.runTask();
                     break;
                 case 3:
-                   caseMenu.setCaseStrategy(new ShowDepartamets());
-                   caseMenu.runTask();
+                    caseMenu.setCaseStrategy(new ShowDepartamets());
+                    caseMenu.runTask();
+                    break;
                 case 4:
                     caseMenu.setCaseStrategy(new UpdateDepartmentFromFactory());
                     caseMenu.runTask();
@@ -71,25 +74,24 @@ public class Main {
                     int sortId = scan.nextInt();
                     factory.setDepartmentMap(factory.sortDepartments(sortId));
                     break;
-                    case 6:
-                     factory.showFindByMethods();
-                     int findById = scan.nextInt();
-                     switch (findById){
-                         case 1:
-                             System.out.println("Imię:");
-                            String name = scan.next();
-                             System.out.println(factory.findBy(name));
-                             break;
-                         case 2:
-                             System.out.println("Nocna zmiana: ");
-                             System.out.println("True - Tak");
-                             System.out.println("False - Nie");
-                             boolean nightShiftGet = scan.nextBoolean();
-                              factory.findBy(nightShiftGet).stream().forEach(System.out::println);
-                             break;
-                     }
-
-                        break;
+                case 6:
+                    factory.showFindByMethods();
+                    int findById = scan.nextInt();
+                    switch (findById) {
+                        case 1:
+                            caseMenu.setCaseStrategy(new FindByName());
+                            caseMenu.runTask();
+                            break;
+                        case 2:
+                            caseMenu.setCaseStrategy(new FindByNightShift());
+                            caseMenu.runTask();
+                            break;
+                    }
+                    break;
+                case 7:
+                  caseMenu.setCaseStrategy(new AddToFile());
+                  caseMenu.runTask();
+                 break;
 
 
             }
