@@ -102,7 +102,7 @@ public class Employee implements  Comparable<Employee> {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                ", department=" + department +
+                ", department=" + department.getName() +
                 ", experience=" + experience +
                 '}';
     }

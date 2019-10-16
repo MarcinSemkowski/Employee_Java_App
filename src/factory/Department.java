@@ -3,6 +3,7 @@ package factory;
 import factory.employee.Employee;
 
 import javax.swing.text.html.HTMLDocument;
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -246,4 +247,15 @@ public class Department {
         return hash;
     }
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "name='" + name + '\'' +
+                ", nightShift=" + nightShift +
+                ", employees=" + employees
+                .stream()
+                .map(e -> e.getName())
+                .collect(Collectors.joining()) +
+                '}';
+    }
 }
