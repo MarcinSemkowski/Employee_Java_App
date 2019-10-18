@@ -1,5 +1,6 @@
 package factory.DB_Connection;
 
+import factory.Department;
 import factory.Factory;
 
 public abstract class DB_Strategy {
@@ -11,7 +12,7 @@ public abstract class DB_Strategy {
     return false;
   }
 
-  protected abstract boolean doCRUDTask();
+  protected abstract boolean doCRUDTask(Factory factory, Department department);
 
 
   protected String getUrl() {
