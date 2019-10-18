@@ -9,6 +9,12 @@ import static java.util.stream.Collectors.toMap;
 
 public class Factory {
 
+    private static int id = 1;
+
+    public static int getId() {
+        return id;
+    }
+
     private String name;
 
     private Map<String, Department> departmentMap;
@@ -16,6 +22,7 @@ public class Factory {
 
 
     public Factory(String name) {
+        id++;
         this.name = name;
         departmentMap = new HashMap<>();
     }

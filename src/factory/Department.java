@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 public class Department {
 
+    private static int id;
+
+
     private String name;
 
     private boolean nightShift;
@@ -16,6 +19,7 @@ public class Department {
     private Set<Employee> employees;
 
     public Department(String name) {
+       id++;
         this.name = name;
         this.employees = new TreeSet<>();
     }
@@ -26,55 +30,55 @@ public class Department {
                 "1. By dodać pracownika do \n"
                 , "2 By usunąć pracownika z \n"
                 , "3. By zaktualizować pracownika \n "
-                ,"4. By sortować  pracowników \n"
-                ,"5. By zobaczyć pracowników "
+                , "4. By sortować  pracowników \n"
+                , "5. By zobaczyć pracowników "
         );
         return employeeMethods;
     }
 
-    public List<String> showSortMethods(){
+    public List<String> showSortMethods() {
         List<String> sortMethods = Arrays.asList(
                 "1.By sortować alfabetycznie  \n"
                 , " By sortować po wieku:\n"
-                ,"2. Od najstarszego do najmłodszego \n"
-                ,"3. Od najmłodszego do najstarszego \n "
+                , "2. Od najstarszego do najmłodszego \n"
+                , "3. Od najmłodszego do najstarszego \n "
         );
         return sortMethods;
     }
 
-    public void sortEmployees(int index){
-       switch(index){
-           case 1:
-               employees = sortAlphabetically();
-               employees
-                       .stream()
-                       .forEach(System.out::println);
-            break;
-           case 2:
-               employees = sortByAge();
-               employees
-                       .stream()
-                       .forEach(System.out::println);
-               break;
-           case 3:
-              employees = sortByAgeReversed();
-              employees
-                      .stream()
-                      .forEach(System.out::println);
-               break;
+    public void sortEmployees(int index) {
+        switch (index) {
+            case 1:
+                employees = sortAlphabetically();
+                employees
+                        .stream()
+                        .forEach(System.out::println);
+                break;
+            case 2:
+                employees = sortByAge();
+                employees
+                        .stream()
+                        .forEach(System.out::println);
+                break;
+            case 3:
+                employees = sortByAgeReversed();
+                employees
+                        .stream()
+                        .forEach(System.out::println);
+                break;
 
-       }
+        }
     }
 
 
-    public Set<Employee> sortAlphabetically(){
-       return  employees
+    public Set<Employee> sortAlphabetically() {
+        return employees
                 .stream()
                 .sorted(Comparator.comparing(Employee::getName))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public Set<Employee> sortByAge(){
+    public Set<Employee> sortByAge() {
 
         return employees
                 .stream()
@@ -82,7 +86,8 @@ public class Department {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
     }
-    public Set<Employee> sortByAgeReversed(){
+
+    public Set<Employee> sortByAgeReversed() {
 
         return employees
                 .stream()
@@ -90,15 +95,6 @@ public class Department {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
     }
-
-
-
-
-
-
-
-
-
 
 
     public Employee employeeInfo(Scanner scan) {
@@ -122,50 +118,50 @@ public class Department {
             case 3:
 
                 Employee employee = employeeInfo(scan);
-                 if(employees.contains(employee)) {
-                     System.out.println("Podaj imię: " + "imię: " + employee.getName());
-                     String name = scan.next();
-                     System.out.println("Podaj wiek: " + "wiek: " + employee.getAge());
-                     int age = scan.nextInt();
-                     System.out.println("Podaj doświadczenie: " + "doświadczenie: " + employee.getExperience());
-                     int experience = scan.nextInt();
-                     updateEmployee(employee,new Employee(name,age,this,experience));
+                if (employees.contains(employee)) {
+                    System.out.println("Podaj imię: " + "imię: " + employee.getName());
+                    String name = scan.next();
+                    System.out.println("Podaj wiek: " + "wiek: " + employee.getAge());
+                    int age = scan.nextInt();
+                    System.out.println("Podaj doświadczenie: " + "doświadczenie: " + employee.getExperience());
+                    int experience = scan.nextInt();
+                    updateEmployee(employee, new Employee(name, age, this, experience));
 
-                 }else{
-                     System.out.println("Nie ma takiego pracownika !");
-                 }
-                 break;
+                } else {
+                    System.out.println("Nie ma takiego pracownika !");
+                }
+                break;
             case 4:
-                 showSortMethods()
-                         .stream()
-                         .forEach(System.out::println);
-                   int sortId = scan.nextInt();
-                   sortEmployees(sortId);
+                showSortMethods()
+                        .stream()
+                        .forEach(System.out::println);
+                int sortId = scan.nextInt();
+                sortEmployees(sortId);
 
                 break;
             case 5:
-               employees
-                       .stream()
-                       .forEach(System.out::println);
+                employees
+                        .stream()
+                        .forEach(System.out::println);
                 break;
 
 
         }
     }
 
-    public boolean updateEmployee(Employee employee,Employee updateEmployee){
-        if(employees.contains(employee)){
+    public boolean updateEmployee(Employee employee, Employee updateEmployee) {
+        if (employees.contains(employee)) {
             employees.remove(employee);
             employees.add(updateEmployee);
-            return  true;
-        } else{
+            return true;
+        } else {
             System.out.println("Nie ma takiego pracownika !");
-          return false;
+            return false;
         }
     }
 
 
-    public boolean deleteEmployee(Employee employee){
+    public boolean deleteEmployee(Employee employee) {
         if (employees.contains(employee)) {
             employees.remove(employee);
             System.out.println("Poprawnie usunięto " + employee.getName() + "z " + this.getName());
@@ -177,7 +173,7 @@ public class Department {
     }
 
     public boolean addEmployeeToDepartment(Employee employee) {
-        if(employees.add(new Employee(employee.getName()
+        if (employees.add(new Employee(employee.getName()
                 , employee.getAge()
                 , employee.getDepartment()
                 , employee.getExperience()))) {
@@ -185,6 +181,11 @@ public class Department {
         }
         return false;
     }
+
+    public static int getId() {
+        return id;
+    }
+
 
 
     public String getName() {
@@ -239,8 +240,8 @@ public class Department {
         hash = 31 * hash + (this.name == null ? 0 : name.hashCode());
         hash = 31 * hash + (Boolean.hashCode(this.nightShift));
         Iterator i = employees.iterator();
-        while(i.hasNext()){
-            Object emp =  i.next();
+        while (i.hasNext()) {
+            Object emp = i.next();
             hash = 31 * hash + (emp == null ? 0 : emp.hashCode());
         }
 

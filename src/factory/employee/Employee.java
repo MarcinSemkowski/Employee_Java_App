@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class Employee implements  Comparable<Employee> {
 
+    private  static int id = 1;
+
     private String name;
 
     private int age;
@@ -17,6 +19,7 @@ public class Employee implements  Comparable<Employee> {
 
 
     public Employee(String name, int age, Department department, int experience) {
+        id++;
         this.name = name;
         this.age = age;
         this.department = department;
@@ -25,6 +28,10 @@ public class Employee implements  Comparable<Employee> {
 
     public int getExperience() {
         return experience;
+    }
+
+    public static int getId() {
+        return id;
     }
 
     public void setExperience(int experience) {

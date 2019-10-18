@@ -1,5 +1,6 @@
 package factory.menu_strategy;
 
+import factory.DB_Connection.DB_Strategy;
 import factory.Factory;
 
 import java.util.Scanner;
@@ -14,7 +15,6 @@ private CaseStrategy caseStrategy;
         this.factory = factory;
         this.scan = scan;
     }
-
     public void runTask(){
          caseStrategy.runCaseTask(factory,scan);
      }
@@ -26,4 +26,5 @@ private CaseStrategy caseStrategy;
     public void setCaseStrategy(CaseStrategy caseStrategy) {
         this.caseStrategy = caseStrategy;
     }
+
 }

@@ -8,11 +8,12 @@ public abstract class DB_Strategy {
   private String user = "root";
   private String password = " ";
 
-  public boolean runTask(){
-    return false;
-  }
 
-  protected abstract boolean doCRUDTask(Factory factory, Department department);
+
+
+
+
+  public abstract boolean doCRUDTask(Factory factory, Department department);
 
 
   protected String getUrl() {
