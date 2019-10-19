@@ -12,7 +12,7 @@ public class CreateFactoryToDB extends DB_Strategy {
 
 
 
-    String sqlInsertFactory = "INSERT INTO Factories (factory_name, factory_departments)" +
+   private   String sqlInsertFactory = "INSERT INTO Factories (factory_name, factory_departments)" +
             " VALUES (?,?);";
 
 

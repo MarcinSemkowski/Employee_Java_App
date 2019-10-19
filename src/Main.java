@@ -1,4 +1,6 @@
-import factory.Department;
+import factory.DB_Connection.CreateDepartmentToDB;
+import factory.DB_Connection.CreateFactoryToDB;
+import factory.DB_Connection.DB_Strategy;
 import factory.Factory;
 import factory.menu_strategy.*;
 
@@ -6,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Main {
 
@@ -24,6 +25,7 @@ public class Main {
         System.out.println("------------------------");
         factory = new Factory(nameFactory);
         caseMenu = new CaseMenu(factory, scan);
+        boolean isAded = new CreateFactoryToDB().doCRUDTask(factory,null);
 
 
         menu();
@@ -54,7 +56,7 @@ public class Main {
             menuNum = scan.nextInt();
             switch (menuNum) {
                 case 1:
-                    caseMenu.setCaseStrategy(new AddToFactory());
+                    caseMenu.setCaseStrategy(new AddToFactory(new CreateDepartmentToDB()));
                     caseMenu.runTask();
                     break;
                 case 2:
