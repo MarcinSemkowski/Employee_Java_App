@@ -117,6 +117,18 @@ public class DepartmentTest {
 
 
     }
+     @Test
+    public void searchEmployeeByName(){
+        //given
+        String findName = "Alexander";
+        Employee employee = new Employee("Alexander",23,department,5);
+        //when
+         department.addEmployeeToDepartment(employee);
+        Employee findEmployee = department.searchEmployeeByName(findName);
+        //then
+        assertNotNull(findEmployee);
+
+    }
 
 
     @Test
