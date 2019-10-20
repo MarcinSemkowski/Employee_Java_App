@@ -230,7 +230,14 @@ public class Department {
         } else {
             return false;
         }
+    }
 
+    public Employee searchEmployeeByName(String employeeName){
+        return  employees
+                .stream()
+                .filter(x -> x.getName().equals(employeeName))
+                .findFirst()
+                .orElse(null);
 
     }
 
