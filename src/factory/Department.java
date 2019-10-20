@@ -1,5 +1,7 @@
 package factory;
 
+
+import factory.DB_Connection.CreateFactoryToDB;
 import factory.employee.Employee;
 
 import javax.swing.text.html.HTMLDocument;
@@ -111,6 +113,7 @@ public class Department {
         switch (index) {
             case 1:
                 addEmployeeToDepartment(employeeInfo(scan));
+
                 break;
             case 2:
                 deleteEmployee(employeeInfo(scan));

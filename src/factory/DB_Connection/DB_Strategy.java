@@ -4,9 +4,9 @@ import factory.Department;
 import factory.Factory;
 
 public abstract class DB_Strategy {
-  private String url = "jdbc:mysql://localhost:3306/Factory";
-  private String user = "root";
-  private String password = " ";
+  private String url =  DatabaseData.URL.getName();
+  private String user = DatabaseData.USER.getName();
+  private String password = DatabaseData.PASSWORD.getName();
 
 
 

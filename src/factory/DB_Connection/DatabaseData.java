@@ -9,6 +9,7 @@ public enum DatabaseData {
 
    private String name;
 
+
      DatabaseData(String name) {
         this.name = name;
     }
