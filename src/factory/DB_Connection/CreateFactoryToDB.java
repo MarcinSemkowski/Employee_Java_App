@@ -2,12 +2,23 @@ package factory.DB_Connection;
 
 import factory.Department;
 import factory.Factory;
+import factory.menu_strategy.MapKeys;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CreateFactoryToDB extends DB_Strategy {
 
+
+
+    @Override
+    public void getDepartmentsMap(Map<String,Department> departmentMap) {
+      this.departmentMap = departmentMap;
+    }
 
     @Override
     public boolean doCRUDTask(Factory factory, Department department) {
@@ -28,9 +39,8 @@ public class CreateFactoryToDB extends DB_Strategy {
                     Statement ps_findDepartments = con.createStatement();
                     Statement ps_FindFactory = con.createStatement();
                     ResultSet resultSetFindFactory = ps_FindFactory.executeQuery(sqlFindFactory);
-                    PreparedStatement createFactory = con.prepareStatement(sqlInsertFactory);
+                    PreparedStatement createFactory = con.prepareStatement(sqlInsertFactory)
                     ) {
-
 
 
                 if (resultSetFindFactory.next()) {
@@ -41,30 +51,33 @@ public class CreateFactoryToDB extends DB_Strategy {
 
                     Optional<String> isFindFactory = Optional.ofNullable(factoryName);
                     if (isFindFactory.isPresent()) {
-                        Factory findFactory = new Factory(factoryName);
-                        factory = findFactory;
-                        rs_FindDepartments = ps_findDepartments.executeQuery("SELECT * FROM  Departments " +
-                                "WHERE dep_factory_id =  " + factory_id);
-                        if (rs_FindDepartments.next()) {
+
+                        rs_FindDepartments = ps_findDepartments.executeQuery("SELECT * FROM Departments WHERE dep_factory_id = " + "'" + factory_id + "'");
+
+                        Map<String,Department> newDeps = new HashMap<>();
                             while (rs_FindDepartments.next()) {
                                 String dep_name = rs_FindDepartments.getString("dep_name");
                                 boolean isNightShift = rs_FindDepartments.getBoolean("is_night_shift");
-
-                                factory.addToFactory(dep_name, isNightShift);
-
+                               Department newDep = new Department(dep_name);
+                               newDep.setNightShift(isNightShift);
+                               newDeps.put(newDep.getName(),newDep);
                             }
-                        }
+                            getDepartmentsMap(newDeps);
+                        List<String> list = factory.getDepartmentMap()
+                                .keySet()
+                                .stream()
+                                .collect(Collectors.toList());
+                        MapKeys.getInstance().setMapKeys(list);
 
+
+
+
+                    }else{
+                        createFactory.setString(1, factory.getName());
+                        createFactory.executeUpdate();
                     }
                 }
-
-
-
-
-                createFactory.setString(1, factory.getName());
-                createFactory.executeUpdate();
                 con.commit();
-
 
 
                 return true;
@@ -87,12 +100,16 @@ public class CreateFactoryToDB extends DB_Strategy {
             }
 
 
+
+
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
 
     }
+
+
 
 
 }

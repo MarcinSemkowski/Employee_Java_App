@@ -2,10 +2,8 @@ package factory;
 
 import factory.DB_Connection.DatabaseData;
 import factory.employee.Employee;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,7 +11,7 @@ public class Department {
 
     private static int idDB = 1;
 
-  private int id;
+    private int id;
     private String name;
 
     private boolean nightShift;
@@ -152,37 +150,52 @@ public class Department {
         }
     }
 
-    public boolean addEmployeeToDatabase(Employee employee){
+    public boolean addEmployeeToDatabase(Employee employee) {
         String sqlAddEmployee = "INSERT INTO employees(employee_name, employee_age, employee_department, employee_experiance) " +
                 "VALUES(?,?,?,?,?)";
-
-        try(Connection conn = DriverManager.getConnection(DatabaseData.URL.getName()
-                ,DatabaseData.USER.getName()
-                ,DatabaseData.PASSWORD.getName())) {
+        ResultSet resultSet = null;
+        try (Connection conn = DriverManager.getConnection(DatabaseData.URL.getName()
+                , DatabaseData.USER.getName()
+                , DatabaseData.PASSWORD.getName())) {
             conn.setAutoCommit(true);
-            try(PreparedStatement ps_addEmployeeToDB = conn.prepareStatement(sqlAddEmployee)) {
-              ps_addEmployeeToDB.setString(1,employee.getName());
-              ps_addEmployeeToDB.setInt(2,employee.getAge());
-              ps_addEmployeeToDB.setInt(3,this.id);
-              ps_addEmployeeToDB.setInt(4,employee.getExperience());
+            try (Statement statement = conn.createStatement();
+                 PreparedStatement ps_addEmployeeToDB = conn.prepareStatement(sqlAddEmployee)) {
 
-              ps_addEmployeeToDB.executeUpdate();
-                return true;
-            }catch (SQLException e){
+                resultSet = statement.executeQuery("SELECT * FROM Departments WHERE dep_name = " + "'" + this.getName() + "'");
+
+                if (resultSet.next()) {
+                    int depId = resultSet.getInt("dep_id");
+                    ps_addEmployeeToDB.setString(1, employee.getName());
+                    ps_addEmployeeToDB.setInt(2, employee.getAge());
+                    ps_addEmployeeToDB.setInt(3, depId);
+                    ps_addEmployeeToDB.setInt(4, employee.getExperience());
+                    ps_addEmployeeToDB.executeUpdate();
+                    conn.commit();
+                    return true;
+                } else {
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
                 e.getMessage();
-                if(conn != null){
+                if (conn != null) {
                     try {
-                      conn.rollback();
-                    }catch (Exception ex){
+                        conn.rollback();
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                         return false;
                     }
                 }
                 return false;
+            } finally {
+                if (resultSet != null) {
+                     resultSet.close();
+                }
             }
 
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.getMessage();
 
             return false;
@@ -252,7 +265,6 @@ public class Department {
     }
 
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -273,8 +285,8 @@ public class Department {
         }
     }
 
-    public Employee searchEmployeeByName(String employeeName){
-        return  employees
+    public Employee searchEmployeeByName(String employeeName) {
+        return employees
                 .stream()
                 .filter(x -> x.getName().equals(employeeName))
                 .findFirst()
