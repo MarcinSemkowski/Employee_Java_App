@@ -9,9 +9,9 @@ public class CreateDepartmentToDB extends DB_Strategy {
 
 
 
-    String sqlUpdateFactory = "UPDATE Factories SET factory_departments = ? WHERE factory_name = ?; ";
+    String sqlGetFactoryId = "Select * from factories WHERE factory_name = ?; ";
 
-    String sqlInsertDepartment = "INSERT INTO Departments (dep_name, is_night_shift, dep_employee) VALUES (?,?,?);";
+    String sqlInsertDepartment = "INSERT INTO Departments (dep_name, is_night_shift, dep_factory_id) VALUES (?,?,?);";
 
 
 
@@ -23,15 +23,16 @@ public class CreateDepartmentToDB extends DB_Strategy {
 
             conn.setAutoCommit(false);
 
-            try (PreparedStatement ps_Update_Factory = conn.prepareStatement(sqlUpdateFactory);
+            try ( PreparedStatement statement = conn.prepareStatement(sqlGetFactoryId);
+                    ResultSet ps_get_id_Factory = statement.executeQuery();
                  PreparedStatement ps_InsertToDepartment = conn.prepareStatement(sqlInsertDepartment)) {
-                ps_Update_Factory.setInt(1,Department.getId());
-                ps_Update_Factory.setString(2,factory.getName());
-                ps_Update_Factory.executeUpdate();
+
+                statement.setString(1,factory.getName());
+                int id =  ps_get_id_Factory.findColumn("factory_id");
 
                 ps_InsertToDepartment.setString(1,department.getName());
                 ps_InsertToDepartment.setBoolean(2,department.isNightShift());
-                ps_InsertToDepartment.setInt(3,-1);
+                ps_InsertToDepartment.setInt(3,id);
                 ps_InsertToDepartment.executeUpdate();
                 conn.commit();
                 return true;

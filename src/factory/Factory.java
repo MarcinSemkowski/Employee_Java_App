@@ -4,15 +4,15 @@ import java.util.*;
 
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toMap;
 
 public class Factory {
 
-    private static int id = 1;
+    private static int idDb = 1;
+    private int id;
 
-    public static int getId() {
-        return id;
+    public static int getIdDb() {
+        return idDb;
     }
 
     private String name;
@@ -22,7 +22,8 @@ public class Factory {
 
 
     public Factory(String name) {
-        id++;
+       id = idDb++;
+
         this.name = name;
         departmentMap = new HashMap<>();
     }

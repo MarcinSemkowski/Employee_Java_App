@@ -3,17 +3,17 @@ package factory.DB_Connection;
 import factory.Department;
 import factory.Factory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Optional;
 
 public class CreateFactoryToDB extends DB_Strategy {
 
 
+    private String sqlFindDepartments = "SELECT * FROM  Departments WHERE dep_factory_id = ? ";
+   private String sqlFindFactory = "SELECT * FROM factories WHERE factory_name = ?";
+   private   String sqlInsertFactory = "INSERT INTO Factories (factory_name)" +
 
-   private   String sqlInsertFactory = "INSERT INTO Factories (factory_name, factory_departments)" +
-            " VALUES (?,?);";
+            " VALUES (?);";
 
 
     @Override
@@ -22,11 +22,45 @@ public class CreateFactoryToDB extends DB_Strategy {
 
             con.setAutoCommit(false);
 
-            try (PreparedStatement ps_InsertFactory = con.prepareStatement(sqlInsertFactory)) {
+            try ( PreparedStatement ps_findDepartments = con.prepareStatement(sqlFindDepartments);
+                  ResultSet rs_FindDepartments =  ps_findDepartments.executeQuery();
+                    PreparedStatement ps_FindFactory = con.prepareStatement(sqlFindFactory);
+                  ResultSet resultSetFindFactory = ps_FindFactory.executeQuery();
+                  PreparedStatement ps_InsertFactory = con.prepareStatement(sqlInsertFactory)) {
+
+
+
+                ps_FindFactory.setString(1,factory.getName());
+
+
+
+               if(resultSetFindFactory.next()){
+                   String factoryName;
+
+                   factoryName = resultSetFindFactory.getString("factory_name");
+
+                   Optional<String> isFindFactory = Optional.ofNullable(factoryName);
+                 if(isFindFactory.isPresent()) {
+                     Factory findFactory = new Factory(factoryName);
+                     factory = findFactory;
+
+                     if(rs_FindDepartments.next()){
+                         while(rs_FindDepartments.next()){
+                            String dep_name = rs_FindDepartments.getString("dep_name");
+                           boolean isNightShift =  rs_FindDepartments.getBoolean("is_night_shift");
+                           if(resultSetFindFactory.getInt("factory_id") ==
+                                   rs_FindDepartments.getInt("dep_factory_id")){
+                               factory.addToFactory(dep_name,isNightShift);
+                           }
+                          }
+                     }
+
+                 }
+               }
 
 
                 ps_InsertFactory.setString(1,factory.getName());
-                ps_InsertFactory.setInt(2, -1);
+
 
                 ps_InsertFactory.executeUpdate();
 
@@ -53,4 +87,9 @@ public class CreateFactoryToDB extends DB_Strategy {
         }
 
     }
+
+
+
+
+
 }

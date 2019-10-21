@@ -1,19 +1,19 @@
 package factory;
 
-
-import factory.DB_Connection.CreateFactoryToDB;
+import factory.DB_Connection.DatabaseData;
 import factory.employee.Employee;
-
-import javax.swing.text.html.HTMLDocument;
-import java.security.cert.CollectionCertStoreParameters;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Department {
 
-    private static int id;
+    private static int idDB = 1;
 
-
+  private int id;
     private String name;
 
     private boolean nightShift;
@@ -21,7 +21,7 @@ public class Department {
     private Set<Employee> employees;
 
     public Department(String name) {
-       id++;
+        id = idDB++;
         this.name = name;
         this.employees = new TreeSet<>();
     }
@@ -152,6 +152,44 @@ public class Department {
         }
     }
 
+    public boolean addEmployeeToDatabase(Employee employee){
+        String sqlAddEmployee = "INSERT INTO employees(employee_name, employee_age, employee_department, employee_experiance) " +
+                "VALUES(?,?,?,?,?)";
+
+        try(Connection conn = DriverManager.getConnection(DatabaseData.URL.getName()
+                ,DatabaseData.USER.getName()
+                ,DatabaseData.PASSWORD.getName())) {
+            conn.setAutoCommit(true);
+            try(PreparedStatement ps_addEmployeeToDB = conn.prepareStatement(sqlAddEmployee)) {
+              ps_addEmployeeToDB.setString(1,employee.getName());
+              ps_addEmployeeToDB.setInt(2,employee.getAge());
+              ps_addEmployeeToDB.setInt(3,this.id);
+              ps_addEmployeeToDB.setInt(4,employee.getExperience());
+
+              ps_addEmployeeToDB.executeUpdate();
+                return true;
+            }catch (SQLException e){
+                e.getMessage();
+                if(conn != null){
+                    try {
+                      conn.rollback();
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                        return false;
+                    }
+                }
+                return false;
+            }
+
+
+        }catch (SQLException e){
+            e.getMessage();
+
+            return false;
+        }
+    }
+
+
     public boolean updateEmployee(Employee employee, Employee updateEmployee) {
         if (employees.contains(employee)) {
             employees.remove(employee);
@@ -185,11 +223,9 @@ public class Department {
         return false;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
-
-
 
     public String getName() {
         return name;
@@ -214,6 +250,8 @@ public class Department {
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {
