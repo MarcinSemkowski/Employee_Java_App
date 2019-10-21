@@ -9,7 +9,7 @@ public class CreateDepartmentToDB extends DB_Strategy {
 
 
 
-    String sqlGetFactoryId = "Select * from factories WHERE factory_name = ?; ";
+
 
     String sqlInsertDepartment = "INSERT INTO Departments (dep_name, is_night_shift, dep_factory_id) VALUES (?,?,?);";
 
@@ -17,17 +17,18 @@ public class CreateDepartmentToDB extends DB_Strategy {
 
     @Override
     public boolean doCRUDTask(Factory factory, Department department) {
+        String sqlGetFactoryId = "SELECT * FROM factories WHERE factory_name = " + "'"  + factory.getName() + "'" ;
 
         try (Connection conn = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPassword())
         ) {
 
             conn.setAutoCommit(false);
 
-            try ( PreparedStatement statement = conn.prepareStatement(sqlGetFactoryId);
-                    ResultSet ps_get_id_Factory = statement.executeQuery();
+            try ( Statement statement = conn.createStatement();
+                    ResultSet ps_get_id_Factory = statement.executeQuery(sqlGetFactoryId);
                  PreparedStatement ps_InsertToDepartment = conn.prepareStatement(sqlInsertDepartment)) {
 
-                statement.setString(1,factory.getName());
+
                 int id =  ps_get_id_Factory.findColumn("factory_id");
 
                 ps_InsertToDepartment.setString(1,department.getName());
