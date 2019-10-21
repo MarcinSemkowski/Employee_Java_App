@@ -63,11 +63,7 @@ public class CreateFactoryToDB extends DB_Strategy {
                                newDeps.put(newDep.getName(),newDep);
                             }
                             getDepartmentsMap(newDeps);
-                        List<String> list = factory.getDepartmentMap()
-                                .keySet()
-                                .stream()
-                                .collect(Collectors.toList());
-                        MapKeys.getInstance().setMapKeys(list);
+
 
 
 
