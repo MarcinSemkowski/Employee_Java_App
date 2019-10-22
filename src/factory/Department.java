@@ -206,7 +206,7 @@ public class Department {
 
     public boolean deleteEmployeeFromDB(Employee employee){
 
-        String sqlDeleteEmployeeDB = "DELETE FROM employee WHERE dep_name = ?";
+        String sqlDeleteEmployeeDB = "DELETE FROM employees WHERE dep_name = ?";
 
         try(Connection conn = DriverManager.getConnection(DatabaseData.URL.getName()
                 ,DatabaseData.USER.getName()
@@ -224,7 +224,29 @@ public class Department {
     }
 
 
+      public boolean updateEmployee(Employee employee){
+        String sqlUpdateEmployee = "UPDATE employee SET employee_name = ?, employee_age= ?, employee_experiance = ?";
 
+        try(Connection connection = DriverManager.getConnection(DatabaseData.URL.getName(),DatabaseData.USER.getName(),DatabaseData.PASSWORD.getName())) {
+
+            try(PreparedStatement psUpdateEmployee = connection.prepareStatement(sqlUpdateEmployee)) {
+                psUpdateEmployee.setString(1, employee.getName());
+                psUpdateEmployee.setInt(2, employee.getAge());
+                psUpdateEmployee.setInt(3, employee.getExperience());
+                psUpdateEmployee.executeUpdate();
+                connection.commit();
+                return true;
+            }catch (SQLException e){
+             e.getMessage();
+
+            }
+
+        }catch (SQLException e){
+            e.getMessage();
+            return false;
+        }
+        return true;
+      }
 
 
 
@@ -235,6 +257,7 @@ public class Department {
         if (employees.contains(employee)) {
             employees.remove(employee);
             employees.add(updateEmployee);
+
             return true;
         } else {
             System.out.println("Nie ma takiego pracownika !");
