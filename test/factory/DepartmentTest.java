@@ -176,6 +176,15 @@ public class DepartmentTest {
         assertTrue(isUpdate);
 
     }
+    @Test
+    public  void addEmployeeToDBTest(){
+        //given
+        Employee employee = new Employee("Mike",27,department,6);
+        //when
+        boolean isAdded = department.addEmployeeToDatabase(employee);
+        //then
+        assertTrue(isAdded);
+    }
 
 
 }
