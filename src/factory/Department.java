@@ -112,7 +112,7 @@ public class Department {
             case 1:
                 Employee newEmployee = employeeInfo(scan);
                 addEmployeeToDepartment(newEmployee);
-                 addEmployeeToDatabase(newEmployee);
+
                 break;
             case 2:
                 deleteEmployee(employeeInfo(scan));
@@ -204,6 +204,25 @@ public class Department {
     }
 
 
+    public boolean deleteEmployeeFromDB(Employee employee){
+
+        String sqlDeleteEmployeeDB = "DELETE FROM employee WHERE dep_name = ?";
+
+        try(Connection conn = DriverManager.getConnection(DatabaseData.URL.getName()
+                ,DatabaseData.USER.getName()
+                ,DatabaseData.PASSWORD.getName())) {
+             try( PreparedStatement statement = conn.prepareStatement(sqlDeleteEmployeeDB)
+             ) {
+               statement.setString(1,employee.getName());
+             }
+
+        }catch (SQLException e){
+            e.getMessage();
+            return false;
+        }
+        return false;
+    }
+
 
 
 
@@ -228,11 +247,15 @@ public class Department {
         if (employees.contains(employee)) {
             employees.remove(employee);
             System.out.println("Poprawnie usunięto " + employee.getName() + "z " + this.getName());
-            return true;
+             boolean isDelete = deleteEmployeeFromDB(employee);
+             if(isDelete){
+                 return true;
+             }
         } else {
             System.out.println("Nie ma takiego pracownika !");
             return false;
         }
+        return false;
     }
 
     public boolean addEmployeeToDepartment(Employee employee) {
@@ -240,10 +263,16 @@ public class Department {
                 , employee.getAge()
                 , employee.getDepartment()
                 , employee.getExperience()))) {
-            return true;
+            boolean isAdded = addEmployeeToDatabase(employee);
+            if(isAdded){
+                return true;
+            }
         }
         return false;
     }
+
+
+
 
     public int getId() {
         return id;
