@@ -101,7 +101,10 @@ public class Employee implements  Comparable<Employee> {
 
     @Override
     public int compareTo(Employee o) {
-       return Integer.compare(this.getExperience(), o.getExperience());
+       if(this.getExperience() == o.getExperience()){
+          return this.getName().compareTo(o.getName());
+       }
+        return Integer.compare(this.getExperience(), o.getExperience());
     }
 
     @Override

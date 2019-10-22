@@ -110,8 +110,9 @@ public class Department {
     public void employeeMenu(int index, Scanner scan) {
         switch (index) {
             case 1:
-                addEmployeeToDepartment(employeeInfo(scan));
-
+                Employee newEmployee = employeeInfo(scan);
+                addEmployeeToDepartment(newEmployee);
+                 addEmployeeToDatabase(newEmployee);
                 break;
             case 2:
                 deleteEmployee(employeeInfo(scan));
@@ -151,13 +152,13 @@ public class Department {
     }
 
     public boolean addEmployeeToDatabase(Employee employee) {
-        String sqlAddEmployee = "INSERT INTO employees(employee_name, employee_age, employee_department, employee_experiance) " +
-                "VALUES(?,?,?,?,?)";
+        String sqlAddEmployee = "INSERT INTO employees(employee_name, employee_age, employee_dep_id, employee_experiance) " +
+                "VALUES(?,?,?,?)";
         ResultSet resultSet = null;
         try (Connection conn = DriverManager.getConnection(DatabaseData.URL.getName()
                 , DatabaseData.USER.getName()
                 , DatabaseData.PASSWORD.getName())) {
-            conn.setAutoCommit(true);
+            conn.setAutoCommit(false);
             try (Statement statement = conn.createStatement();
                  PreparedStatement ps_addEmployeeToDB = conn.prepareStatement(sqlAddEmployee)) {
 
@@ -178,7 +179,7 @@ public class Department {
 
 
             } catch (SQLException e) {
-                e.getMessage();
+                System.out.println(e.getMessage());
                 if (conn != null) {
                     try {
                         conn.rollback();
@@ -201,6 +202,14 @@ public class Department {
             return false;
         }
     }
+
+
+
+
+
+
+
+
 
 
     public boolean updateEmployee(Employee employee, Employee updateEmployee) {
