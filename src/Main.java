@@ -1,13 +1,12 @@
 import factory.DB_Connection.CreateDepartmentToDB;
 import factory.DB_Connection.CreateFactoryToDB;
 import factory.DB_Connection.DB_Strategy;
+import factory.DB_Connection.UpdateDepartmentDB;
+import factory.Department;
 import factory.Factory;
 import factory.menu_strategy.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -64,11 +63,14 @@ public class Main {
                     caseMenu.runTask();
                     break;
                 case 3:
-                    caseMenu.setCaseStrategy(new ShowDepartamets());
+
+                    caseMenu.setCaseStrategy(new ShowDepartamets( new CreateFactoryToDB()));
                     caseMenu.runTask();
+
+
                     break;
                 case 4:
-                    caseMenu.setCaseStrategy(new UpdateDepartmentFromFactory());
+                    caseMenu.setCaseStrategy(new UpdateDepartmentFromFactory(new UpdateDepartmentDB()));
                     caseMenu.runTask();
                     break;
                 case 5:

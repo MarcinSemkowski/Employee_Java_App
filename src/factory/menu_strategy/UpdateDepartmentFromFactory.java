@@ -1,5 +1,6 @@
 package factory.menu_strategy;
 
+import factory.DB_Connection.DB_Strategy;
 import factory.Factory;
 
 import java.util.List;
@@ -7,6 +8,13 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class UpdateDepartmentFromFactory implements CaseStrategy {
+
+    private DB_Strategy db_strategy;
+
+    public UpdateDepartmentFromFactory(DB_Strategy db_strategy) {
+        this.db_strategy = db_strategy;
+    }
+
     @Override
     public void runCaseTask(Factory factory, Scanner scan) {
         System.out.println("Wybierz kadrę. By zaktualizować.");

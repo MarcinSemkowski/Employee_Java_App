@@ -224,7 +224,7 @@ public class Department {
     }
 
 
-      public boolean updateEmployee(Employee employee){
+      public boolean updateEmployeeToDB(Employee employee){
         String sqlUpdateEmployee = "UPDATE employee SET employee_name = ?, employee_age= ?, employee_experiance = ?";
 
         try(Connection connection = DriverManager.getConnection(DatabaseData.URL.getName(),DatabaseData.USER.getName(),DatabaseData.PASSWORD.getName())) {
@@ -257,8 +257,13 @@ public class Department {
         if (employees.contains(employee)) {
             employees.remove(employee);
             employees.add(updateEmployee);
+            boolean isUpdated = updateEmployeeToDB(updateEmployee);
+            if(isUpdated){
+                return true;
+            } else{
+              return false;
+            }
 
-            return true;
         } else {
             System.out.println("Nie ma takiego pracownika !");
             return false;
