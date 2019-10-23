@@ -19,6 +19,8 @@ public class DeleteDepartmentDB extends DB_Strategy {
             try(PreparedStatement psDeleteDepartment = conn.prepareStatement(sqlDeleteDepartment)) {
                 psDeleteDepartment.setString(1,department.getName());
                 psDeleteDepartment.setBoolean(2,department.isNightShift());
+                psDeleteDepartment.executeUpdate();
+                conn.commit();
               return true;
             }catch (SQLException e){
                 e.getMessage();
